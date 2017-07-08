@@ -32,6 +32,7 @@ import re
 import shutil
 from xml.dom import minidom
 import zipfile
+from StringIO import StringIO
 
 try:
   from osgeo import gdal
@@ -158,14 +159,19 @@ def translate_zip(src_file, dst_file, driver, create_options=None, replace_nodat
     progress(0.0)
 
   for i, name in enumerate(namelist):
-    if name[-4:].lower() == ".xml" and not "meta" in name:
-      tif_name = os.path.join(temp_dir, os.path.basename(name) + ".tif")
+    if name[-4:].lower() == ".zip":
       with zf.open(name) as f:
-        translate_jpgis_gml(f.read(), tif_name, driver, create_options, replace_nodata_by_zero)
+        fp = StringIO(f.read())
+        datazip = zipfile.ZipFile(fp, mode="r")
+        dataxml = datazip.namelist()[0]
+        tif_name = os.path.join(temp_dir, os.path.basename(dataxml) + ".tif")
+        with datazip.open(dataxml) as fd:
+          translate_jpgis_gml(fd.read(), tif_name, driver, create_options, replace_nodata_by_zero)
       demlist.append(tif_name)
     if not quiet and not verbose:
       progress((i + 1.) / len(namelist))
   zf.close()
+
   if len(demlist) == 0:
     return "Zip file includes no xml file: " + src_file
 
