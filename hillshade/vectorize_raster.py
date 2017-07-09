@@ -3,9 +3,9 @@ from rasterio import features, Affine
 from shapely.geometry import Polygon, MultiPolygon, mapping
 from fiona.crs import from_epsg
 import numpy as np
-import tools
 from scipy.ndimage import zoom
 from scipy.ndimage.filters import median_filter, maximum_filter
+from makesurface.scripts import tools
 
 def classify(inArr, classes, weighting):
     outRas = np.zeros(inArr.shape, dtype=np.uint8)
@@ -59,7 +59,7 @@ def classifyManual(inArr, classArr):
         breaks[i + 1] = float(classArr[i])
         outRas[np.where(inArr >= classArr[i])] = i + 1
     outRas[np.where(inArr.mask == True)] = 0
-    breaks[0] = -999
+    breaks[0] = 0
     return outRas.astype(np.uint8), breaks
 
 def zoomSmooth(inArr, smoothing, inAffine):
@@ -73,16 +73,13 @@ def zoomSmooth(inArr, smoothing, inAffine):
     del zoomed, zoomMask
     return inArr, oaff
 
-def vectorizeRaster(infile, outfile, classes, classfile, weight, nodata, smoothing, band, cartoCSS, axonometrize, nosimple, setNoData, nibbleMask, outvar):
+def vectorizeRaster(infile, outfile, classes, classfile, weight, smoothing, axonometrize, nosimple, setNoData, nibbleMask):
+    band = 1
+    nodata = 0
 
     with rasterio.drivers():
         with rasterio.open(infile, 'r') as src:
-            try:
-                band = int(band)
-            except:
-                raise ValueError('Band must be an integer')
-
-            inarr = src.read_band(band)
+            inarr = src.read(band)
             oshape = src.shape
             oaff = src.affine
 
@@ -92,22 +89,11 @@ def vectorizeRaster(infile, outfile, classes, classfile, weight, nodata, smoothi
 
             simplest = ((src.bounds.top - src.bounds.bottom) / float(src.shape[0]))
 
-            if nodata == 'min':
-                maskArr = np.zeros(inarr.shape, dtype=np.bool)
-                maskArr[np.where(inarr == inarr.min())] = True
-                inarr = np.ma.array(inarr, mask=maskArr)
-                del maskArr
-            elif type(nodata) == int or type(nodata) == float:
-                maskArr = np.zeros(inarr.shape, dtype=np.bool)
-                maskArr[np.where(inarr == nodata)] = True
-                inarr = np.ma.array(inarr, mas=maskArr)
-                del maskArr
-            elif src.meta['nodata'] == None or np.isnan(src.meta['nodata']) or nodata:
-                maskArr = np.zeros(inarr.shape, dtype=np.bool)
-                inarr = np.ma.array(inarr, mask=maskArr)
-                del maskArr
-            elif (type(src.meta['nodata']) == int or type(src.meta['nodata']) == float) and hasattr(inarr, 'mask'):
-                nodata = True
+            # nodata
+            maskArr = np.zeros(inarr.shape, dtype=np.bool)
+            maskArr[np.where(inarr == nodata)] = True
+            inarr = np.ma.array(inarr, mask=maskArr)
+            del maskArr
 
             if nibbleMask:
                 inarr.mask = maximum_filter(inarr.mask, size=3)
@@ -118,32 +104,40 @@ def vectorizeRaster(infile, outfile, classes, classfile, weight, nodata, smoothi
     else:
         smoothing = 1
 
-    if classfile:
-        with open(classfile, 'r') as ofile:
-            classifiers = ofile.read().split(',')
-            classRas, breaks = classifyManual(inarr, np.array(classifiers).astype(inarr.dtype))
-    elif classes == 'all':
-        classRas, breaks = classifyAll(inarr)
-    else:
-        classRas, breaks = classify(inarr, int(classes), weight)
+    # mapbox-terrain-v2 levels
+    # https://www.mapbox.com/vector-tiles/mapbox-terrain/#hillshade
+    #classifiers = [56, 67, 78, 89, 90, 94]
+    classifiers = [80, 100, 130, 170, 185, 200]
+    classRas, breaks = classifyManual(inarr, np.array(classifiers).astype(inarr.dtype))
+
+    print classRas, breaks
 
     # filtering for speckling
     classRas = median_filter(classRas, size=2)
 
-    # print out cartocss for classes
-    if cartoCSS:
-        for i in breaks:
-            click.echo('[value = ' + str(breaks[i]) + '] { polygon-fill: @class' + str(i) + '}')
 
     if outfile:
         outputHandler = tools.dataOutput(True)
     else:
         outputHandler = tools.dataOutput()
 
-    for i, br in enumerate(breaks): 
-        tRas = (classRas >= i).astype(np.uint8)
+    for i, br in enumerate(breaks):
+        if i < 4: # shadow
+            cl = 'shadow'
+            tRas = (classRas <= i).astype(np.uint8)
+
+        elif i == 4: # flat
+            continue
+
+        else: # hilight
+            cl = 'hilight'
+            tRas = (classRas >= i).astype(np.uint8)
+ 
+        print i, cl, tRas
+
         if nodata:
             tRas[np.where(classRas == 0)] = 0
+
         for feature, shapes in features.shapes(np.asarray(tRas,order='C'),transform=oaff):
             if shapes == 1:
                 featurelist = []
@@ -157,18 +151,27 @@ def vectorizeRaster(infile, outfile, classes, classfile, weight, nodata, smoothi
                         else:
                             poly = Polygon(f).simplify(simplest / float(smoothing), preserve_topology=True)
                         featurelist.append(poly)
+
                 if len(featurelist) != 0:
                     oPoly = MultiPolygon(featurelist)
                     outputHandler.out({
                         'type': 'Feature',
                         'geometry': mapping(oPoly),
                         'properties': {
-                            outvar: br
+                            'class': cl,
+                            'level': br
                         }
-                        })
+                    })
     if outfile:
         with open(outfile, 'w') as ofile:
             ofile.write(json.dumps({
                 "type": "FeatureCollection",
                 "features": outputHandler.data
             }))
+
+
+
+if __name__ == '__main__':
+    import sys
+    vectorizeRaster(sys.argv[1], sys.argv[2], 10, "classfile2.csv", 1.0, None, None, False, None, False)
+
