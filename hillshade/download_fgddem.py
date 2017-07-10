@@ -35,14 +35,14 @@ def downloaditer(mesh1st, n):
     meshlist = getlist(mesh1st, n)
     print meshlist
     if len(meshlist) == 0: return
-    time.sleep(1)
 
     ids, files = downloadlist(meshlist)
     #print ids, files
 
     filename = 'download/FG-DEM-' + str(mesh1st) + '-' + str(n) + '.zip'
     downloadfile(filename, ids, files)
-    time.sleep(2)
+
+    deletelist()
 
     fgddem.unzip_all(filename, 'dem')
 
@@ -112,6 +112,28 @@ def downloadlist(meshlist):
     for match in re.finditer(u'<input type="button" value="ダウンロード" onclick="download\(this, (\d*),\d*\);">', html):
         ids.append(match.group(1))
     return ids, files
+
+def deletelist():
+    url = 'https://fgd.gsi.go.jp/download/list.php'
+    form = {
+        'delfile': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49',
+        'data': 0,
+        'fmt': 1,
+        'mapFlg': 1,
+        't1': 0,
+        't2': 0,
+        't3': 0,
+        't4': 0,
+        't5': 0,
+        't6': 0,
+        't7': 0,
+        't8': 0,
+        't9': 0,
+        't10': 0,
+    }
+    headers = { 'Cookie': cookie }
+    res = requests.post(url, form, headers=headers)
+
 
 def getlist(mesh1st, n):
     url = 'https://fgd.gsi.go.jp/download/Ajax/listdem.php'
