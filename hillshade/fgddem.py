@@ -238,6 +238,28 @@ def unzip(src_file, dest=None):
       print "unzipped : %s" % dest
 
 
+def unzip_all(src_file, dst_dir):
+  driver = gdal.GetDriverByName("GTiff")
+  create_options = None
+  replace_nodata_by_zero = False
+
+  # open zip file and translate xml files
+  zf = zipfile.ZipFile(src_file, mode="r")
+  namelist = zf.namelist()
+  demlist = []
+
+  for i, name in enumerate(namelist):
+    if name[-4:].lower() == ".zip":
+      with zf.open(name) as f:
+        fp = StringIO(f.read())
+        datazip = zipfile.ZipFile(fp, mode="r")
+        dataxml = datazip.namelist()[0]
+        tif_name = os.path.join(dst_dir, os.path.basename(dataxml[:-4]) + ".tif")
+        with datazip.open(dataxml) as fd:
+          translate_jpgis_gml(fd.read(), tif_name, driver, create_options, replace_nodata_by_zero)
+      demlist.append(tif_name)
+  zf.close()
+
 def Usage():
   print "=== Usage ==="
   print "python fgddem.py [-replace_nodata_by_zero] [-f format] [-out_dir output_directory] [-q] [-v] src_files*\n"

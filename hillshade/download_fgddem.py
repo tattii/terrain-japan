@@ -3,23 +3,47 @@ import os, re
 import requests
 from tqdm import tqdm
 
+import zipfile
+import fgddem
+
 cookie = os.environ['FGD_COOKIE']
 
-def download():
-    mesh1st = 5233
 
+def download():
+    meshlist = getmeshlist()
+    print meshlist
+
+    for mesh1st in meshlist[:2]:
+        downloadmesh(mesh1st)
+
+def getmeshlist():
+    url = 'http://www.hcc.co.jp/work/gismap/mesh/mesh.html'
+    res = requests.get(url)
+    html = res.text
+
+    meshlist = []
+    for match in re.finditer(u'<area title="(\d+):([^"]*?)" alt=', html):
+        meshlist.append(int(match.group(1)))
+
+    return meshlist
+
+def downloadmesh(mesh1st):
     downloaditer(mesh1st, 1)
     downloaditer(mesh1st, 2)
 
 def downloaditer(mesh1st, n):
     meshlist = getlist(mesh1st, n)
     print meshlist
+    if len(meshlist) == 0: return
 
     ids, files = downloadlist(meshlist)
-    print ids, files
+    #print ids, files
 
-    filename = 'data/FG-DEM-' + str(mesh1st) + '-' + str(n) + '.zip'
+    filename = 'download/FG-DEM-' + str(mesh1st) + '-' + str(n) + '.zip'
     downloadfile(filename, ids, files)
+
+    fgddem.unzip_all(filename, 'dem')
+
 
 def downloadfile(filename, ids, files):
     url = 'https://fgd.gsi.go.jp/download/dlall.php'
@@ -34,7 +58,7 @@ def downloadfile(filename, ids, files):
     }
     headers = { 'Cookie': cookie }
     res = requests.post(url, form, headers=headers, stream=True)
-    print res.headers
+    #print res.headers
     length = int(res.headers['Content-Length'])
 
     if res.status_code == 200:
