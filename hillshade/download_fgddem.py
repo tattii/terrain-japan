@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os, re
+import os, time, re
 import requests
 from tqdm import tqdm
 
@@ -35,12 +35,14 @@ def downloaditer(mesh1st, n):
     meshlist = getlist(mesh1st, n)
     print meshlist
     if len(meshlist) == 0: return
+    time.sleep(1)
 
     ids, files = downloadlist(meshlist)
     #print ids, files
 
     filename = 'download/FG-DEM-' + str(mesh1st) + '-' + str(n) + '.zip'
     downloadfile(filename, ids, files)
+    time.sleep(2)
 
     fgddem.unzip_all(filename, 'dem')
 
