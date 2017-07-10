@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidGF0dGlpIiwiYSI6ImNqMWFrZ3ZncjAwNmQzM3BmazRtNngxam8ifQ.DNMc6j7E4Gh7UkUAaEAPxA';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/tattii/cj3jrmgsp002i2rt50tobxo27',
+    zoom: 5,
+    center: [136.6, 35.5]
+});
+
+
+map.on("load", function() {
+	map.addSource("vtile", {
+		"type": "vector",
+		"minzoom": 0,
+		"maxzoom": 14,
+		"tiles": ["http://localhost:10080/osm/terrain-japan/hillshade/hillshade-vtile/{z}/{x}/{y}.pbf"]
+	});
+
+	map.addLayer({
+		"id": "hillshade",
+		"type": "fill",
+		"source": "vtile",
+		"source-layer": "hillshade",
+		"paint": {
+			"fill-color": "rgba(126, 199, 216, 0.4)",
+			"fill-outline-color": "rgba(0, 84, 153, 0.7)"
+		}
+	});
+
+});
+
+
+</script>
+
+</body>
+</html>
+
