@@ -13,8 +13,9 @@ def download():
     meshlist = getmeshlist()
     print meshlist
 
-    for mesh1st in meshlist[:2]:
-        downloadmesh(mesh1st)
+    #for mesh1st in meshlist[:2]:
+    #    downloadmesh(mesh1st)
+    downloadmesh(5235)
 
 def getmeshlist():
     url = 'http://www.hcc.co.jp/work/gismap/mesh/mesh.html'

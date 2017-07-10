@@ -73,7 +73,13 @@ def zoomSmooth(inArr, smoothing, inAffine):
     del zoomed, zoomMask
     return inArr, oaff
 
-def vectorizeRaster(infile, outfile, classes, classfile, weight, smoothing, axonometrize, nosimple, setNoData, nibbleMask):
+def vectorizeRaster(infile, outfile):
+    weight = 1.0
+    smoothing = None
+    axonometrize = None
+    nosimple = False
+    setNoData = False
+    nibbleMask = False
     band = 1
     nodata = 0
 
@@ -133,7 +139,7 @@ def vectorizeRaster(infile, outfile, classes, classfile, weight, smoothing, axon
             cl = 'hilight'
             tRas = (classRas >= i).astype(np.uint8)
  
-        print i, cl, tRas
+        print i, br, cl #, tRas
 
         if nodata:
             tRas[np.where(classRas == 0)] = 0
@@ -173,5 +179,5 @@ def vectorizeRaster(infile, outfile, classes, classfile, weight, smoothing, axon
 
 if __name__ == '__main__':
     import sys
-    vectorizeRaster(sys.argv[1], sys.argv[2], 10, "classfile2.csv", 1.0, None, None, False, None, False)
+    vectorizeRaster(sys.argv[1], sys.argv[2])
 
