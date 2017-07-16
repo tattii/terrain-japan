@@ -73,11 +73,11 @@ def zoomSmooth(inArr, smoothing, inAffine):
     del zoomed, zoomMask
     return inArr, oaff
 
-def vectorizeRaster(infile, outfile):
+def vectorizeRaster(infile, outfile=None):
     weight = 1.0
     smoothing = None
     axonometrize = None
-    nosimple = False
+    nosimple = True
     setNoData = False
     nibbleMask = False
     band = 1
@@ -122,10 +122,7 @@ def vectorizeRaster(infile, outfile):
     classRas = median_filter(classRas, size=2)
 
 
-    if outfile:
-        outputHandler = tools.dataOutput(True)
-    else:
-        outputHandler = tools.dataOutput()
+    outputHandler = tools.dataOutput(True)
 
     for i, br in enumerate(breaks):
         if i < 4: # shadow
@@ -175,6 +172,9 @@ def vectorizeRaster(infile, outfile):
                 "features": outputHandler.data
             }))
 
+    else:
+        # retrun geojson
+        return outputHandler.data
 
 
 if __name__ == '__main__':
