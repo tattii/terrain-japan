@@ -520,8 +520,8 @@ class GDAL2Tiles(object):
 
         # Tile format
         self.tilesize = 256
-        self.tiledriver = 'PNG'
-        self.tileext = 'png'
+        self.tiledriver = 'GTiff'
+        self.tileext = 'tif'
 
         # Should we read bigger window of the input raster and scale it down?
         # Note: Modified leter by open_input()
@@ -853,7 +853,7 @@ gdal2tiles temp.vrt""" % self.input )
                         os.unlink(tempfilename)
 
                         # set NODATA_VALUE metadata
-                        self.out_ds.SetMetadataItem('NODATA_VALUES','%i %i %i' % (self.in_nodata[0],self.in_nodata[1],self.in_nodata[2]))
+                        self.out_ds.SetMetadataItem('NODATA_VALUES','%i' % (self.in_nodata[0]))
 
                         if self.options.verbose:
                             print("Modified warping result saved into 'tiles1.vrt'")
