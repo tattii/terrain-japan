@@ -19,16 +19,7 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "https://free.tilehosting.com/data/v3.json?key={key}"
-    },
-    "hillshading": {
-      "type": "raster",
-      "url": "https://klokantech.tilehosting.com/data/hillshades.json?key=tXme5cuqgrCqdPoZHqyn",
-      "tileSize": 256
-    },
-    "contours": {
-      "type": "vector",
-      "url": "https://klokantech.tilehosting.com/data/contours.json?key=tXme5cuqgrCqdPoZHqyn"
+      "url": "http://localhost:8080/data/v3.json"
     }
   },
   "glyphs": "https://free.tilehosting.com/fonts/{fontstack}/{range}.pbf?key={key}",
@@ -37,7 +28,7 @@
       "id": "background",
       "type": "background",
       "paint": {
-        "background-color": "hsl(47, 26%, 88%)"
+        "background-color": "rgba(247, 246, 234, 1)"
       }
     },
     {
@@ -167,35 +158,6 @@
       }
     },
     {
-      "id": "hillshading",
-      "type": "raster",
-      "source": "hillshading",
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "raster-opacity": {
-          "base": 0.5,
-          "stops": [
-            [
-              3,
-              0
-            ],
-            [
-              5,
-              0.15
-            ],
-            [
-              12,
-              0.15
-            ]
-          ]
-        },
-        "raster-fade-duration": 300,
-        "raster-contrast": 0
-      }
-    },
-    {
       "id": "landuse",
       "type": "fill",
       "source": "openmaptiles",
@@ -251,122 +213,6 @@
           0.5,
           1
         ]
-      }
-    },
-    {
-      "id": "contour_label",
-      "type": "symbol",
-      "metadata": {},
-      "source": "contours",
-      "source-layer": "contour",
-      "interactive": true,
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "LineString"
-        ],
-        [
-          "in",
-          "nth_line",
-          10,
-          5
-        ],
-        [
-          ">",
-          "height",
-          0
-        ]
-      ],
-      "layout": {
-        "text-size": {
-          "base": 1,
-          "stops": [
-            [
-              15,
-              9.5
-            ],
-            [
-              20,
-              12
-            ]
-          ]
-        },
-        "text-allow-overlap": false,
-        "symbol-avoid-edges": true,
-        "text-ignore-placement": false,
-        "symbol-placement": "line",
-        "text-padding": 10,
-        "text-rotation-alignment": "map",
-        "text-field": "{height} m",
-        "text-font": [
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
-        ]
-      },
-      "paint": {
-        "text-color": "hsl(0, 0%, 37%)",
-        "text-halo-color": "hsla(0, 0%, 100%, 0.5)",
-        "text-halo-width": 1.5
-      }
-    },
-    {
-      "id": "contour_index",
-      "type": "line",
-      "source": "contours",
-      "source-layer": "contour",
-      "interactive": true,
-      "filter": [
-        "all",
-        [
-          ">",
-          "height",
-          0
-        ],
-        [
-          "in",
-          "nth_line",
-          10,
-          5
-        ]
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "hsl(0, 1%, 58%)",
-        "line-opacity": 0.4,
-        "line-width": 1.1
-      }
-    },
-    {
-      "id": "contour",
-      "type": "line",
-      "source": "contours",
-      "source-layer": "contour",
-      "interactive": true,
-      "filter": [
-        "all",
-        [
-          "!in",
-          "nth_line",
-          10,
-          5
-        ],
-        [
-          ">",
-          "height",
-          0
-        ]
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "hsl(0, 1%, 58%)",
-        "line-opacity": 0.3,
-        "line-width": 0.6
       }
     },
     {
@@ -1227,7 +1073,7 @@
         ]
       ],
       "layout": {
-        "text-field": "{name_en}",
+        "text-field": "{name}",
         "text-font": [
           "Klokantech Noto Sans Regular",
           "Klokantech Noto Sans CJK Regular"
@@ -1275,7 +1121,7 @@
         ]
       ],
       "layout": {
-        "text-field": "{name_en}",
+        "text-field": "{name}",
         "text-font": [
           "Klokantech Noto Sans Regular",
           "Klokantech Noto Sans CJK Regular"
