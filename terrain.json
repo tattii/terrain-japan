@@ -180,6 +180,169 @@
       }
     },
     {
+      "id": "aerodrome",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "aeroway",
+      "filter": [
+        "==",
+        "class",
+        "aerodrome"
+      ],
+      "layout": {},
+      "paint": {
+        "fill-color": "rgba(234, 234, 234, 1)"
+      }
+    },
+    {
+      "id": "aeroway-taxiway",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "aeroway",
+      "minzoom": 9,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "taxiway"
+        ]
+      ],
+      "layout": {},
+      "paint": {
+        "line-color": {
+          "base": 1,
+          "stops": [
+            [
+              15,
+              "hsl(230, 23%, 82%)"
+            ],
+            [
+              16,
+              "hsl(230, 37%, 84%)"
+            ]
+          ]
+        },
+        "line-width": {
+          "base": 1.5,
+          "stops": [
+            [
+              10,
+              0.5
+            ],
+            [
+              18,
+              20
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "aeroway-polygon",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "aeroway",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "!in",
+          "class",
+          "aerodrome",
+          "apron"
+        ],
+        [
+          "==",
+          "$type",
+          "Polygon"
+        ]
+      ],
+      "layout": {},
+      "paint": {
+        "fill-color": {
+          "base": 1,
+          "stops": [
+            [
+              15,
+              "hsl(230, 23%, 82%)"
+            ],
+            [
+              16,
+              "hsl(230, 37%, 84%)"
+            ]
+          ]
+        },
+        "fill-opacity": {
+          "base": 1,
+          "stops": [
+            [
+              11,
+              0
+            ],
+            [
+              11.5,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "aeroway-runway",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "aeroway",
+      "minzoom": 9,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "runway"
+        ]
+      ],
+      "layout": {},
+      "paint": {
+        "line-color": {
+          "base": 1,
+          "stops": [
+            [
+              15,
+              "hsl(230, 23%, 82%)"
+            ],
+            [
+              16,
+              "hsl(230, 37%, 84%)"
+            ]
+          ]
+        },
+        "line-width": {
+          "base": 1.5,
+          "stops": [
+            [
+              9,
+              1
+            ],
+            [
+              18,
+              80
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "water",
       "type": "fill",
       "source": "openmaptiles",
