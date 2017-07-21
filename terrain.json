@@ -74,13 +74,13 @@
       }
     },
     {
-      "id": "park",
+      "id": "national_park",
       "type": "fill",
       "source": "openmaptiles",
       "source-layer": "park",
       "paint": {
-        "fill-color": "rgba(192, 216, 151, 0.53)",
-        "fill-opacity": 1
+        "fill-color": "hsl(100, 59%, 76%)",
+        "fill-opacity": 0.75
       }
     },
     {
@@ -101,44 +101,26 @@
       }
     },
     {
-      "id": "landuse_overlay_national_park",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landcover",
-      "filter": [
-        "==",
-        "class",
-        "national_park"
-      ],
-      "paint": {
-        "fill-color": "#E1EBB0",
-        "fill-opacity": {
-          "base": 1,
-          "stops": [
-            [
-              5,
-              0
-            ],
-            [
-              9,
-              0.75
-            ]
-          ]
-        }
-      }
-    },
-    {
-      "id": "park_outline",
+      "id": "national_park_outline",
       "type": "line",
       "source": "openmaptiles",
       "source-layer": "park",
       "layout": {},
       "paint": {
-        "line-color": "rgba(159, 183, 118, 0.69)",
-        "line-dasharray": [
-          0.5,
-          1
-        ]
+        "line-color": "hsl(100, 40%, 67%)",
+        "line-width": {
+          "base": 1,
+          "stops": [
+            [
+              9,
+              0.75
+            ],
+            [
+              12,
+              1
+            ]
+          ]
+        }
       }
     },
     {
