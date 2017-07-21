@@ -343,6 +343,110 @@
       }
     },
     {
+      "id": "waterway-river",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "waterway",
+      "minzoom": 8,
+      "filter": [
+        "in",
+        "class",
+        "canal",
+        "river"
+      ],
+      "paint": {
+        "line-color": "hsl(196, 59%, 83%)",
+        "line-width": {
+          "base": 1.3,
+          "stops": [
+            [
+              8.5,
+              0.4
+            ],
+            [
+              20,
+              8
+            ]
+          ]
+        },
+        "line-opacity": {
+          "base": 1,
+          "stops": [
+            [
+              8,
+              0
+            ],
+            [
+              8.5,
+              1
+            ]
+          ]
+        }
+      },
+      "layout": {
+        "line-cap": {
+          "base": 1,
+          "stops": [
+            [
+              0,
+              "butt"
+            ],
+            [
+              11,
+              "round"
+            ]
+          ]
+        },
+        "line-join": "round"
+      }
+    },
+    {
+      "id": "waterway-small",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "waterway",
+      "minzoom": 13,
+      "filter": [
+        "!in",
+        "class",
+        "canal",
+        "river"
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "hsl(196, 59%, 83%)",
+        "line-width": {
+          "base": 1.35,
+          "stops": [
+            [
+              13.5,
+              0.4
+            ],
+            [
+              20,
+              3
+            ]
+          ]
+        },
+        "line-opacity": {
+          "base": 1,
+          "stops": [
+            [
+              13,
+              0
+            ],
+            [
+              13.5,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "water",
       "type": "fill",
       "source": "openmaptiles",
@@ -353,35 +457,35 @@
         "Polygon"
       ],
       "paint": {
-        "fill-color": "hsl(205, 56%, 73%)"
+        "fill-color": "hsl(196, 59%, 83%)"
       }
     },
     {
-      "id": "waterway",
-      "type": "line",
+      "id": "wetlands",
+      "type": "fill",
       "source": "openmaptiles",
-      "source-layer": "waterway",
+      "source-layer": "landcover",
       "filter": [
         "==",
-        "$type",
-        "LineString"
+        "class",
+        "wetland"
       ],
+      "layout": {},
       "paint": {
-        "line-color": "hsl(205, 56%, 73%)",
-        "line-width": {
-          "base": 1.4,
+        "fill-color": "hsl(185, 43%, 74%)",
+        "fill-opacity": {
+          "base": 1,
           "stops": [
             [
-              8,
-              1
+              10,
+              0.25
             ],
             [
-              20,
-              8
+              10.5,
+              0.15
             ]
           ]
-        },
-        "line-opacity": 1
+        }
       }
     },
     {
