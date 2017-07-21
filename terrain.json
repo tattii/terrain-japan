@@ -489,57 +489,6 @@
       }
     },
     {
-      "id": "building",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "building",
-      "paint": {
-        "fill-color": "hsl(39, 41%, 86%)",
-        "fill-outline-color": "hsl(36, 45%, 80%)",
-        "fill-opacity": {
-          "base": 1,
-          "stops": [
-            [
-              13,
-              0.6
-            ],
-            [
-              14,
-              1
-            ]
-          ]
-        }
-      },
-      "layout": {
-        "visibility": "none"
-      }
-    },
-    {
-      "id": "housenumber",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "housenumber",
-      "minzoom": 17,
-      "filter": [
-        "==",
-        "$type",
-        "Point"
-      ],
-      "layout": {
-        "text-field": "{housenumber}",
-        "text-size": 10,
-        "text-font": [
-          "Klokantech Noto Sans Regular",
-          "Klokantech Noto Sans CJK Regular"
-        ]
-      },
-      "paint": {
-        "text-color": "hsla(0, 14%, 57%, 0.51)",
-        "text-halo-color": "hsl(39, 41%, 86%)",
-        "text-halo-width": 0.5
-      }
-    },
-    {
       "id": "road_path",
       "type": "line",
       "source": "openmaptiles",
