@@ -135,6 +135,51 @@
       }
     },
     {
+      "id": "school",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "landuse",
+      "filter": [
+        "in",
+        "class",
+        "school",
+        "university",
+        "kindergarten",
+        "college"
+      ],
+      "layout": {},
+      "paint": {
+        "fill-color": {
+          "base": 1,
+          "stops": [
+            [
+              15.5,
+              "hsl(50, 47%, 81%)"
+            ],
+            [
+              16,
+              "hsl(50, 63%, 84%)"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "military",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "landuse",
+      "filter": [
+        "==",
+        "class",
+        "military"
+      ],
+      "layout": {},
+      "paint": {
+        "fill-color": "rgba(223, 219, 212, 1)"
+      }
+    },
+    {
       "id": "water",
       "type": "fill",
       "source": "openmaptiles",
@@ -197,6 +242,9 @@
             ]
           ]
         }
+      },
+      "layout": {
+        "visibility": "none"
       }
     },
     {
