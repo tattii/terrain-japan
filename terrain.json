@@ -28,37 +28,11 @@
       "id": "background",
       "type": "background",
       "paint": {
-        "background-color": "rgba(247, 246, 234, 1)"
+        "background-color": "hsl(35, 12%, 89%)"
       }
     },
     {
-      "id": "landuse-residential",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landuse",
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Polygon"
-        ],
-        [
-          "==",
-          "class",
-          "residential"
-        ]
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "hsl(47, 13%, 86%)",
-        "fill-opacity": 0.7
-      }
-    },
-    {
-      "id": "landcover_grass",
+      "id": "grass",
       "type": "fill",
       "source": "openmaptiles",
       "source-layer": "landcover",
@@ -68,12 +42,12 @@
         "grass"
       ],
       "paint": {
-        "fill-color": "hsl(82, 46%, 72%)",
-        "fill-opacity": 0.45
+        "fill-color": "hsl(75, 41%, 74%)",
+        "fill-opacity": 0.4
       }
     },
     {
-      "id": "landcover_wood",
+      "id": "wood",
       "type": "fill",
       "source": "openmaptiles",
       "source-layer": "landcover",
@@ -83,17 +57,17 @@
         "wood"
       ],
       "paint": {
-        "fill-color": "hsl(82, 46%, 72%)",
+        "fill-color": "hsl(75, 41%, 74%)",
         "fill-opacity": {
-          "base": 1,
+          "base": 0.5,
           "stops": [
             [
               8,
-              0.6
+              0.3
             ],
             [
-              22,
-              1
+              15,
+              0.5
             ]
           ]
         }
@@ -107,54 +81,6 @@
       "paint": {
         "fill-color": "rgba(192, 216, 151, 0.53)",
         "fill-opacity": 1
-      }
-    },
-    {
-      "id": "landcover-ice-shelf",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landcover",
-      "filter": [
-        "==",
-        "subclass",
-        "ice_shelf"
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "hsl(47, 26%, 88%)",
-        "fill-opacity": 0.8
-      }
-    },
-    {
-      "id": "landcover-glacier",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landcover",
-      "filter": [
-        "==",
-        "subclass",
-        "glacier"
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "hsl(47, 22%, 94%)",
-        "fill-opacity": {
-          "base": 1,
-          "stops": [
-            [
-              0,
-              1
-            ],
-            [
-              8,
-              0.5
-            ]
-          ]
-        }
       }
     },
     {
