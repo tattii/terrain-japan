@@ -84,23 +84,6 @@
       }
     },
     {
-      "id": "landuse",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "landuse",
-      "filter": [
-        "==",
-        "class",
-        "agriculture"
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "#eae0d0"
-      }
-    },
-    {
       "id": "national_park_outline",
       "type": "line",
       "source": "openmaptiles",
@@ -117,6 +100,34 @@
             ],
             [
               12,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "park",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "landcover",
+      "filter": [
+        "==",
+        "subclass",
+        "park"
+      ],
+      "layout": {},
+      "paint": {
+        "fill-color": "hsl(100, 59%, 76%)",
+        "fill-opacity": {
+          "base": 1,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              6,
               1
             ]
           ]
