@@ -20,16 +20,17 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/tattii/cj3jrmgsp002i2rt50tobxo27',
     zoom: 5,
-    center: [136.6, 35.5]
+    center: [136.6, 35.5],
+	hash: true
 });
 
 
 map.on("load", function() {
 	map.addSource("vtile", {
 		"type": "vector",
-		"minzoom": 0,
+		"minzoom": 7,
 		"maxzoom": 14,
-		"tiles": ["http://localhost:10080/osm/terrain-japan/hillshade/hillshade-vtile/{z}/{x}/{y}.pbf"]
+		"tiles": ["http://localhost:10080/osm/terrain-japan/hillshade/vtile2/{z}/{x}/{y}.pbf"]
 	});
 
 	map.addLayer({

@@ -77,7 +77,7 @@ def vectorizeRaster(infile, outfile=None):
     weight = 1.0
     smoothing = None
     axonometrize = None
-    nosimple = True
+    nosimple = False
     setNoData = False
     nibbleMask = False
     band = 1
@@ -150,7 +150,7 @@ def vectorizeRaster(infile, outfile=None):
                             f = np.array(f)
                             f[:,1] += (axonometrize * br)
                         if nosimple:
-                             poly = Polygon(f)
+                            poly = Polygon(f)
                         else:
                             poly = Polygon(f).simplify(simplest / float(smoothing), preserve_topology=True)
                         featurelist.append(poly)

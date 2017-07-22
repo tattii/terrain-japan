@@ -14,12 +14,16 @@ def vectortiles(src_dir, dst_dir):
     for file in files:
         _, z, x, y = file[:-4].split('/')
 
-        dst = '/'.join([dst_dir, z, x, y]) + '.pbf' 
-        count += 1
-        print count, '/', lenfile, dst
+        if int(z) == 10:
+            dst = '/'.join([dst_dir, z, x, y]) + '.json' 
+            count += 1
+            print count, '/', lenfile, dst
 
-        features = vectorize.vectorizeRaster(file)
-        tovectortile(features, dst)
+            if not os.path.exists(os.path.dirname(dst)):
+                os.makedirs(os.path.dirname(dst))
+            features = vectorize.vectorizeRaster(file, dst)
+            #features = vectorize.vectorizeRaster(file)
+            #tovectortile(features, dst)
 
 def tovectortile(features, dst):
     if not os.path.exists(os.path.dirname(dst)):
@@ -30,11 +34,12 @@ def tovectortile(features, dst):
             'name': 'hillshade',
             'features': features
         }
-    ])
+    ], extents=256)
 
     with open(dst, 'w') as f:
         f.write(vtile)
 
 if __name__ == '__main__':
-    vectortiles('tiles2', 'vector-tiles')
+    vectortiles('tiles2', 'geojson-tiles')
+    #vectortiles('tiles2', 'vector-tiles')
 

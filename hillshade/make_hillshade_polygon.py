@@ -2,6 +2,7 @@
 import os
 import subprocess
 
+import vectorize
 
 def warp(src_dir, dst_dir):
     files = os.listdir(src_dir)
@@ -37,7 +38,6 @@ def polygonize(src_dir, dst_dir):
 
     if not os.path.exists(dst_dir): os.mkdir(dst_dir)
 
-    import vectorize
     for file in files:
         if file[-3:] == 'tif':
             src = src_dir + '/' + file
@@ -46,9 +46,19 @@ def polygonize(src_dir, dst_dir):
 
             vectorize.vectorizeRaster(src, dst)
             
+def polygonize1st(src_dir, dst_dir):
+    for z in range(7, 12):
+        src = src_dir + '/z' + str(z) 
+        dst = dst_dir + '/z' + str(z) 
+
+        polygonize(src, dst)
 
 if __name__ == '__main__':
     #warp('dem', 'mercator')
-    hillshade('mercator', 'hillshade')
+    #hillshade('mercator', 'hillshade')
     #polygonize('hillshade', 'polygon')
+    polygonize1st('layers', 'polygon-z')
+    #polygonize('hillshade-z/z12', 'polygon-z/z12')
+    #polygonize('hillshade-z/z14', 'polygon-z/z14')
+    #polygonize('hillshade-z/z15', 'polygon-z/z15')
 
