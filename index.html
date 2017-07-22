@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Klokantech Basic - TileServer GL</title>
+  <link rel="stylesheet" type="text/css" href="lib/mapbox-gl.css" />
+  <script src="lib/mapbox-gl.js"></script>
+  <link rel="stylesheet" type="text/css" href="lib/mapbox.css" />
+  <script src="lib/mapbox.js"></script>
+  <script src="lib/leaflet-hash.js"></script>
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+</head>
+<body>
+  <h1 style="display:none;">Klokantech Basic</h1>
+  <div id='map'></div>
+  <script>
+    var q = (location.search || '').substr(1).split('&');
+    var preference =
+      q.indexOf('vector') >= 0 ? 'vector' :
+        (q.indexOf('raster') >= 0 ? 'raster' :
+          (mapboxgl.supported() ? 'vector' : 'raster'));
+    if (preference == 'vector') {
+      mapboxgl.setRTLTextPlugin('lib/mapbox-gl-rtl-text.js');
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'terrain.json',
+        hash: true,
+        maxZoom: 15
+      });
+      map.addControl(new mapboxgl.NavigationControl());
+    } else {
+      var map = L.mapbox.map('map', 'terrain.json', { zoomControl: false });
+      new L.Control.Zoom({ position: 'topright' }).addTo(map);
+      setTimeout(function() {
+        new L.Hash(map);
+      }, 0);
+    }
+  </script>
+</body>
+</html>
