@@ -1,36 +1,9 @@
 # -*- coding: utf-8 -*-
-import os
+import os, glob
 import subprocess
 
 import vectorize
 
-def warp(src_dir, dst_dir):
-    files = os.listdir(src_dir)
-    print len(files), 'files'
-
-    if not os.path.exists(dst_dir): os.mkdir(dst_dir)
-
-    for file in files:
-        if file[-3:] == 'tif':
-            src = src_dir + '/' + file
-            dst = dst_dir + '/' + file
-            command = 'gdalwarp -s_srs EPSG:4326 -t_srs EPSG:3785 -r bilinear ' + src + ' ' + dst
-            print command
-            subprocess.call(command, shell=True)
-
-def hillshade(src_dir, dst_dir):
-    files = os.listdir(src_dir)
-    print len(files), 'files'
-
-    if not os.path.exists(dst_dir): os.mkdir(dst_dir)
-
-    for file in files:
-        if file[-3:] == 'tif':
-            src = src_dir + '/' + file
-            dst = dst_dir + '/' + file
-            command = 'gdaldem hillshade -compute_edges ' + src + ' ' + dst
-            print command
-            subprocess.call(command, shell=True)
 
 def polygonize(src_dir, dst_dir):
     files = os.listdir(src_dir)
@@ -53,12 +26,23 @@ def polygonize1st(src_dir, dst_dir):
 
         polygonize(src, dst)
 
+
+def polygonize2nd(src_dir, dst_dir, mesh_1st):
+    for z in [12, 13, 14]:
+        srcd = src_dir + '/z' + str(z)
+        files = glob.glob(srcd + '/FG-GML-' + str(mesh_1st) + '-*.tif')
+        dstd = dst_dir + '/z' + str(z)
+        if not os.path.exists(dstd): os.makedirs(dstd)
+        l = len(files)
+        i = 0
+
+        for file in files:
+            i += 1
+            dst = dstd + '/' + os.path.basename(file)[:-3] + 'json'
+            print i, '/', l, dst
+            vectorize.vectorizeRaster(file, dst)
+
 if __name__ == '__main__':
-    #warp('dem', 'mercator')
-    #hillshade('mercator', 'hillshade')
-    #polygonize('hillshade', 'polygon')
-    polygonize1st('layers', 'polygon-z')
-    #polygonize('hillshade-z/z12', 'polygon-z/z12')
-    #polygonize('hillshade-z/z14', 'polygon-z/z14')
-    #polygonize('hillshade-z/z15', 'polygon-z/z15')
+    #polygonize1st('layers', 'polygon-z2')
+    polygonize2nd('vdata/hillshade', 'vdata/polygon', 5235)
 

@@ -73,11 +73,10 @@ def zoomSmooth(inArr, smoothing, inAffine):
     del zoomed, zoomMask
     return inArr, oaff
 
-def vectorizeRaster(infile, outfile=None):
+def vectorizeRaster(infile, outfile=None, nosimple=False):
     weight = 1.0
     smoothing = None
     axonometrize = None
-    nosimple = False
     setNoData = False
     nibbleMask = False
     band = 1
@@ -116,7 +115,8 @@ def vectorizeRaster(infile, outfile=None):
     classifiers = [80, 100, 130, 170, 185, 200]
     classRas, breaks = classifyManual(inarr, np.array(classifiers).astype(inarr.dtype))
 
-    print classRas, breaks
+    #print classRas, breaks
+    print 'nosimple:', nosimple, simplest
 
     # filtering for speckling
     classRas = median_filter(classRas, size=2)
@@ -136,7 +136,7 @@ def vectorizeRaster(infile, outfile=None):
             cl = 'hilight'
             tRas = (classRas >= i).astype(np.uint8)
  
-        print i, br, cl #, tRas
+        print br, cl #, tRas
 
         if nodata:
             tRas[np.where(classRas == 0)] = 0
