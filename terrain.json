@@ -487,7 +487,6 @@
         }
       }
     },
-
     {
       "id": "tunnel-trunk_link-case",
       "type": "line",
@@ -1039,7 +1038,6 @@
         "line-join": "round"
       }
     },
-
     {
       "id": "road-motorway_link-case",
       "type": "line",
@@ -1341,7 +1339,6 @@
         }
       }
     },
-
     {
       "id": "road-pedestrian",
       "paint": {
@@ -3043,7 +3040,209 @@
       }
     },
     {
-      "id": "place_label_other",
+      "id": "place_island_small",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "island"
+        ],
+        [
+          ">",
+          "rank",
+          3
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Klokantech Noto Sans Regular",
+          "Klokantech Noto Sans CJK Regular"
+        ],
+        "text-max-width": 6,
+        "text-size": {
+          "stops": [
+            [
+              8,
+              8
+            ],
+            [
+              12,
+              12
+            ]
+          ]
+        },
+        "visibility": "visible",
+        "text-anchor": "center"
+      },
+      "paint": {
+        "text-color": "hsl(0, 10%, 25%)",
+        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-blur": 0,
+        "text-halo-width": 1.5
+      }
+    },
+    {
+      "id": "place_island_big",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "minzoom": 8,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "island"
+        ],
+        [
+          "<=",
+          "rank",
+          3
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Klokantech Noto Sans Regular",
+          "Klokantech Noto Sans CJK Regular"
+        ],
+        "text-max-width": 6,
+        "text-size": {
+          "stops": [
+            [
+              6,
+              10
+            ],
+            [
+              12,
+              14
+            ]
+          ]
+        },
+        "visibility": "visible",
+        "text-anchor": "center"
+      },
+      "paint": {
+        "text-color": "hsl(0, 10%, 25%)",
+        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-blur": 0,
+        "text-halo-width": 2
+      }
+    },
+    {
+      "id": "place_hamlet",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "hamlet"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Klokantech Noto Sans Regular",
+          "Klokantech Noto Sans CJK Regular"
+        ],
+        "text-max-width": 6,
+        "text-size": {
+          "stops": [
+            [
+              12,
+              8
+            ],
+            [
+              15,
+              12
+            ]
+          ]
+        },
+        "visibility": "visible",
+        "text-anchor": "center"
+      },
+      "paint": {
+        "text-color": "hsl(0, 10%, 25%)",
+        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-blur": 0,
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "place_suburb",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "minzoom": 8,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "suburb"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Klokantech Noto Sans Regular",
+          "Klokantech Noto Sans CJK Regular"
+        ],
+        "text-max-width": 6,
+        "text-size": {
+          "stops": [
+            [
+              8,
+              8
+            ],
+            [
+              12,
+              12
+            ]
+          ]
+        },
+        "visibility": "visible",
+        "text-anchor": "center"
+      },
+      "paint": {
+        "text-color": "hsl(0, 10%, 25%)",
+        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-blur": 0,
+        "text-halo-width": 1.5
+      }
+    },
+    {
+      "id": "place_town",
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "place",
@@ -3058,9 +3257,10 @@
         [
           "all",
           [
-            "!=",
+            "in",
             "class",
-            "city"
+            "town",
+            "village"
           ]
         ]
       ],
@@ -3094,7 +3294,7 @@
       }
     },
     {
-      "id": "place_label_city",
+      "id": "place_city",
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "place",
@@ -3137,52 +3337,6 @@
         "text-halo-color": "hsla(0, 0%, 100%, 0.75)",
         "text-halo-blur": 0,
         "text-halo-width": 2
-      }
-    },
-    {
-      "id": "country_label",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "place",
-      "maxzoom": 12,
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          "==",
-          "class",
-          "country"
-        ]
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Klokantech Noto Sans Bold",
-          "Klokantech Noto Sans CJK Bold"
-        ],
-        "text-max-width": 10,
-        "text-size": {
-          "stops": [
-            [
-              3,
-              12
-            ],
-            [
-              8,
-              22
-            ]
-          ]
-        }
-      },
-      "paint": {
-        "text-color": "hsl(0, 0%, 13%)",
-        "text-halo-color": "rgba(255,255,255,0.75)",
-        "text-halo-width": 2,
-        "text-halo-blur": 0
       }
     }
   ],
