@@ -2929,9 +2929,156 @@
           "Point"
         ],
         [
+          "!in",
+          "class",
+          "school",
+          "park"
+        ],
+        [
           "==",
           "rank",
           1
+        ]
+      ],
+      "layout": {
+        "text-size": 11,
+        "text-font": [
+          "Klokantech Noto Sans Regular",
+          "Klokantech Noto Sans CJK Regular"
+        ],
+        "visibility": "visible",
+        "text-offset": [
+          0,
+          0.5
+        ],
+        "icon-size": 1,
+        "text-anchor": "top",
+        "text-field": "{name}",
+        "text-max-width": 8
+      },
+      "paint": {
+        "text-color": "#666",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255,255,255,0.75)",
+        "text-halo-blur": 1
+      }
+    },
+    {
+      "id": "poi_school",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "poi",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "school"
+        ],
+        [
+          "<",
+          "rank",
+          20
+        ]
+      ],
+      "layout": {
+        "text-size": 11,
+        "text-font": [
+          "Klokantech Noto Sans Regular",
+          "Klokantech Noto Sans CJK Regular"
+        ],
+        "visibility": "visible",
+        "text-offset": [
+          0,
+          0.5
+        ],
+        "icon-size": 1,
+        "text-anchor": "top",
+        "text-field": "{name}",
+        "text-max-width": 8
+      },
+      "paint": {
+        "text-color": "#666",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255,255,255,0.75)",
+        "text-halo-blur": 1
+      }
+    },
+    {
+      "id": "poi_park",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "poi",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "park"
+        ],
+        [
+          "<=",
+          "rank",
+          10
+        ]
+      ],
+      "layout": {
+        "text-size": 11,
+        "text-font": [
+          "Klokantech Noto Sans Regular",
+          "Klokantech Noto Sans CJK Regular"
+        ],
+        "visibility": "visible",
+        "text-offset": [
+          0,
+          0.5
+        ],
+        "icon-size": 1,
+        "text-anchor": "top",
+        "text-field": "{name}",
+        "text-max-width": 8
+      },
+      "paint": {
+        "text-color": "#666",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255,255,255,0.75)",
+        "text-halo-blur": 1
+      }
+    },
+    {
+      "id": "poi_station",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "poi",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "railway"
+        ],
+        [
+          "<=",
+          "rank",
+          10
         ]
       ],
       "layout": {
@@ -3014,6 +3161,11 @@
           "==",
           "rank",
           1
+        ],
+        [
+          ">",
+          "ele",
+          300
         ]
       ],
       "layout": {
@@ -3178,7 +3330,7 @@
               8
             ],
             [
-              15,
+              14.5,
               12
             ]
           ]
