@@ -4,7 +4,8 @@ from osgeo import gdal
 
 
 def scaleraster(file, dst, tx, ty):
-    command = 'gdalwarp -s_srs EPSG:4326 -t_srs EPSG:3785 -r bilinear -ts %d %d %s %s' % (int(tx), int(ty), file, dst)
+    # ty = 0 guessed from the computed resolution
+    command = 'gdalwarp -s_srs EPSG:4326 -t_srs EPSG:3785 -r bilinear -ts %d %d %s %s' % (int(tx), 0, file, dst)
     print command
     subprocess.call(command, shell=True)
 
