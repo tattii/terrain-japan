@@ -43,6 +43,6 @@ def polygonize2nd(src_dir, dst_dir, mesh_1st):
             vectorize.vectorizeRaster(file, dst)
 
 if __name__ == '__main__':
-    #polygonize1st('layers', 'polygon-z2')
-    polygonize2nd('vdata/hillshade', 'vdata/polygon', 5235)
+    polygonize1st('vdata/hillshade', 'vdata/polygon')
+    #polygonize2nd('vdata/hillshade', 'vdata/polygon', 5235)
 

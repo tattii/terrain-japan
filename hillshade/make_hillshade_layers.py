@@ -26,6 +26,15 @@ def hillshade(files, dst_dir):
         subprocess.call(command, shell=True)
 
 
+def mergefiles(src_dir, dst_dir, mesh_1st):
+    if not os.path.exists(dst_dir): os.makedirs(dst_dir)
+    src = src_dir + '/FG-GML-' + str(mesh_1st) + '-*.tif'
+    dst = dst_dir + '/FG-GML-' + str(mesh_1st) + '.tif'
+    command = 'gdal_merge.py -o ' + dst + ' ' + src
+    print command
+    subprocess.call(command, shell=True)
+    return dst
+
 def scalefiles(files, dst_dir, zooms):
     print len(files), 'files'
 
@@ -51,19 +60,16 @@ def hillshadefiles(files, src_dir, dst_dir, zooms):
         hillshade(zfiles, dstd)
 
 
-def scale1st(file):
-    x, y = getsize(file)
+def scale1st(src_dir, dst_dir, mesh_1st): 
+    # merge
+    file = mergefiles(src_dir, 'vdata/merge', mesh_1st)
 
-    # downscale
-    for z in range(7, 12):
-        scale = 2 ** (13 - z)
-        tx = x / scale
-        ty = y / scale
-        print scale, tx, ty
-        dst_dir = 'layers/z' + str(z)
-        if not os.path.exists(dst_dir): os.makedirs(dst_dir)
-        dst = dst_dir + '/' + file
-        scaleraster(file, dst, tx, ty)
+    # warp + scale
+    scalefiles([file], 'vdata/dem', range(7, 12))
+
+    # hillshade
+    hillshadefiles([file], 'vdata/dem', 'vdata/hillshade', range(7, 12))
+
 
 def scale2nd(src_dir, dst_dir, mesh_1st): 
     files = glob.glob(src_dir + '/FG-GML-' + str(mesh_1st) + '-*.tif')
@@ -76,6 +82,6 @@ def scale2nd(src_dir, dst_dir, mesh_1st):
 
 
 if __name__ == '__main__':
-    #scale1st(sys.argv[1])
-    scale2nd('dem', 'vdata/hillshade', 5235)
+    scale1st('dem', 'vdata/hillshade', 5235)
+    #scale2nd('dem', 'vdata/hillshade', 5235)
 
