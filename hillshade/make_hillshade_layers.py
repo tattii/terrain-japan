@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os, sys, subprocess, glob
+import math
 from osgeo import gdal
 
 
@@ -8,6 +9,21 @@ def scaleraster(file, dst, tx, ty):
     command = 'gdalwarp -s_srs EPSG:4326 -t_srs EPSG:3785 -r bilinear -ts %d %d %s %s' % (int(tx), 0, file, dst)
     print command
     subprocess.call(command, shell=True)
+
+    if tx > 2000:
+        retile(dst)
+
+def retile(file):
+    dstd = os.path.dirname(file)
+    x, y = getsize(file)
+    command = 'gdal_retile.py -ps %d %d -targetDir %s %s' % (x / 2, math.ceil(y / 2.), dstd, file)
+    print command
+    subprocess.call(command, shell=True)
+
+    # move base tif
+    dstd2 = dstd + '/base/'
+    if not os.path.exists(dstd2): os.makedirs(dstd2)
+    os.rename(file, dstd2 + os.path.basename(file))
 
 def getsize(file):
     src = gdal.Open(file)
@@ -50,14 +66,14 @@ def scalefiles(files, dst_dir, zooms):
             ty = y * scale
             scaleraster(file, dst, tx, ty)
 
-def hillshadefiles(files, src_dir, dst_dir, zooms):
+def hillshadefiles(src_dir, dst_dir, mesh_1st, zooms):
     for z in zooms:
         srcd = src_dir + '/z' + str(z)
         dstd = dst_dir + '/z' + str(z)
         if not os.path.exists(dstd): os.makedirs(dstd)
-        zfiles = [srcd + '/' + os.path.basename(file) for file in files]
-
-        hillshade(zfiles, dstd)
+    
+        files = glob.glob(srcd + '/FG-GML-' + str(mesh_1st) + '*.tif')
+        hillshade(files, dstd)
 
 
 def scale1st(src_dir, dst_dir, mesh_1st): 
@@ -68,7 +84,7 @@ def scale1st(src_dir, dst_dir, mesh_1st):
     scalefiles([file], 'vdata/dem', range(7, 12))
 
     # hillshade
-    hillshadefiles([file], 'vdata/dem', 'vdata/hillshade', range(7, 12))
+    hillshadefiles('vdata/dem', 'vdata/hillshade', mesh_1st, range(7, 12))
 
 
 def scale2nd(src_dir, dst_dir, mesh_1st): 
@@ -78,7 +94,7 @@ def scale2nd(src_dir, dst_dir, mesh_1st):
     scalefiles(files, 'vdata/dem', [12, 13, 14])
 
     # hillshade
-    hillshadefiles(files, 'vdata/dem', 'vdata/hillshade', [12, 13, 14])
+    hillshadefiles('vdata/dem', 'vdata/hillshade', mesh_1st, [12, 13, 14])
 
 
 if __name__ == '__main__':
