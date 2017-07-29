@@ -19,6 +19,12 @@
     "openmaptiles": {
       "type": "vector",
       "url": "http://localhost:8080/data/v3.json"
+    },
+    "hillshade": {
+      "type": "vector",
+      "tiles": [
+        "http://localhost:8001/hillshade/vdata/vtile/{z}/{x}/{y}.pbf"
+      ]
     }
   },
   "glyphs": "https://free.tilehosting.com/fonts/{fontstack}/{range}.pbf?key={key}",
@@ -339,6 +345,189 @@
             ]
           ]
         }
+      }
+    },
+    {
+      "id": "hillshade_highlight_bright",
+      "type": "fill",
+      "source": "hillshade",
+      "source-layer": "hillshade",
+      "maxzoom": 18,
+      "filter": [
+        "==",
+        "level",
+        6
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "hsl(0, 0%, 100%)",
+        "fill-opacity": {
+          "stops": [
+            [
+              15,
+              0.15
+            ],
+            [
+              18,
+              0
+            ]
+          ]
+        },
+        "fill-antialias": false
+      }
+    },
+    {
+      "id": "hillshade_highlight_med",
+      "type": "fill",
+      "source": "hillshade",
+      "source-layer": "hillshade",
+      "filter": [
+        "==",
+        "level",
+        5
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "hsl(0, 0%, 100%)",
+        "fill-opacity": {
+          "stops": [
+            [
+              15,
+              0.15
+            ],
+            [
+              18,
+              0
+            ]
+          ]
+        },
+        "fill-antialias": false
+      }
+    },
+    {
+      "id": "hillshade_shadow_faint",
+      "type": "fill",
+      "source": "hillshade",
+      "source-layer": "hillshade",
+      "maxzoom": 17,
+      "filter": [
+        "==",
+        "level",
+        3
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "hsl(56, 59%, 22%)",
+        "fill-opacity": {
+          "stops": [
+            [
+              15,
+              0.07
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "fill-antialias": false
+      }
+    },
+    {
+      "id": "hillshade_shadow_med",
+      "type": "fill",
+      "source": "hillshade",
+      "source-layer": "hillshade",
+      "filter": [
+        "==",
+        "level",
+        2
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "hsl(56, 59%, 22%)",
+        "fill-opacity": {
+          "stops": [
+            [
+              15,
+              0.07
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "fill-antialias": false
+      }
+    },
+    {
+      "id": "hillshade_shadow_dark",
+      "type": "fill",
+      "source": "hillshade",
+      "source-layer": "hillshade",
+      "filter": [
+        "==",
+        "level",
+        1
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "hsl(56, 59%, 22%)",
+        "fill-opacity": {
+          "stops": [
+            [
+              15,
+              0.08
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "fill-antialias": false
+      }
+    },
+    {
+      "id": "hillshade_shadow_extreme",
+      "type": "fill",
+      "source": "hillshade",
+      "source-layer": "hillshade",
+      "maxzoom": 17,
+      "filter": [
+        "==",
+        "level",
+        0
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "hsl(56, 59%, 22%)",
+        "fill-opacity": {
+          "stops": [
+            [
+              15,
+              0.08
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "fill-antialias": false
       }
     },
     {
@@ -2361,7 +2550,6 @@
         "line-color": "hsl(46, 69%, 68%)"
       }
     },
-
     {
       "id": "bridge-primary",
       "type": "line",
