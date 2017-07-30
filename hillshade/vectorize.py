@@ -77,10 +77,9 @@ def vectorizeRaster(infile, outfile=None, nosimple=False):
     weight = 1.0
     smoothing = None
     axonometrize = None
-    setNoData = False
+    setNoData = 0
     nibbleMask = False
     band = 1
-    nodata = 0
 
     with rasterio.drivers():
         with rasterio.open(infile, 'r') as src:
@@ -96,7 +95,7 @@ def vectorizeRaster(infile, outfile=None, nosimple=False):
 
             # nodata
             maskArr = np.zeros(inarr.shape, dtype=np.bool)
-            maskArr[np.where(inarr == nodata)] = True
+            maskArr[np.where(inarr == setNoData)] = True
             inarr = np.ma.array(inarr, mask=maskArr)
             del maskArr
 
@@ -112,7 +111,7 @@ def vectorizeRaster(infile, outfile=None, nosimple=False):
     # mapbox-terrain-v2 levels
     # https://www.mapbox.com/vector-tiles/mapbox-terrain/#hillshade
     #classifiers = [56, 67, 78, 89, 90, 94]
-    classifiers = [80, 100, 130, 170, 185, 200]
+    classifiers = [80, 100, 130, 175, 190, 210]
     classRas, breaks = classifyManual(inarr, np.array(classifiers).astype(inarr.dtype))
 
     #print classRas, breaks
@@ -137,9 +136,6 @@ def vectorizeRaster(infile, outfile=None, nosimple=False):
             tRas = (classRas >= i).astype(np.uint8)
  
         print br, cl #, tRas
-
-        if nodata:
-            tRas[np.where(classRas == 0)] = 0
 
         for feature, shapes in features.shapes(np.asarray(tRas,order='C'),transform=oaff):
             if shapes == 1:
