@@ -23,7 +23,7 @@
     "hillshade": {
       "type": "vector",
       "tiles": [
-        "http://localhost:8001/hillshade/vdata/vtile/{z}/{x}/{y}.pbf"
+        "http://localhost:8001/hillshade/vdata/vtile3/{z}/{x}/{y}.pbf"
       ]
     }
   },
@@ -3403,9 +3403,11 @@
           "island"
         ],
         [
-          ">",
+          "in",
           "rank",
-          3
+          4,
+          5,
+          6
         ]
       ],
       "layout": {
