@@ -2228,36 +2228,6 @@
       }
     },
     {
-      "id": "railway",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "transportation",
-      "filter": [
-        "==",
-        "class",
-        "rail"
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "hsl(34, 12%, 66%)",
-        "line-opacity": {
-          "base": 1,
-          "stops": [
-            [
-              11,
-              0
-            ],
-            [
-              16,
-              1
-            ]
-          ]
-        }
-      }
-    },
-    {
       "id": "bridge-trunk_link-case",
       "type": "line",
       "source": "openmaptiles",
@@ -2793,6 +2763,96 @@
       }
     },
     {
+      "id": "railway",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "railway",
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "hsl(34, 12%, 66%)",
+        "line-opacity": {
+          "base": 1,
+          "stops": [
+            [
+              9,
+              0.5
+            ],
+            [
+              16,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "railway-jr-bg",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "railway",
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "jr"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "rgb(176, 176, 176)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "railway-jr-dashline",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "railway",
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "jr"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "rgb(255, 255, 255)",
+        "line-width": 1.8,
+        "line-dasharray": [
+          3,
+          3
+        ]
+      }
+    },
+
+    {
       "id": "admin-3-4-boundaries-bg",
       "type": "line",
       "source": "openmaptiles",
@@ -3292,7 +3352,7 @@
       "id": "poi_station",
       "type": "symbol",
       "source": "openmaptiles",
-      "source-layer": "poi",
+      "source-layer": "railway",
       "minzoom": 5,
       "filter": [
         "all",
@@ -3300,16 +3360,6 @@
           "==",
           "$type",
           "Point"
-        ],
-        [
-          "==",
-          "class",
-          "railway"
-        ],
-        [
-          "<=",
-          "rank",
-          10
         ]
       ],
       "layout": {
