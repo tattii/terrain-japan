@@ -179,7 +179,6 @@
         "class",
         "school",
         "university",
-        "kindergarten",
         "college"
       ],
       "layout": {},
@@ -1343,7 +1342,7 @@
       "type": "line",
       "source": "openmaptiles",
       "source-layer": "transportation",
-      "minzoom": 11,
+      "minzoom": 9,
       "filter": [
         "all",
         [
@@ -2136,7 +2135,7 @@
       "type": "line",
       "source": "openmaptiles",
       "source-layer": "transportation",
-      "minzoom": 10,
+      "minzoom": 9,
       "filter": [
         "all",
         [
@@ -3155,7 +3154,9 @@
           "!in",
           "class",
           "school",
-          "park"
+          "park",
+          "theme_park",
+          "zoo"
         ],
         [
           "==",
@@ -3205,6 +3206,11 @@
           "school"
         ],
         [
+          "!=",
+          "subclass",
+          "kindergarten"
+        ],
+        [
           "<",
           "rank",
           20
@@ -3247,9 +3253,11 @@
           "Point"
         ],
         [
-          "==",
+          "in",
           "class",
-          "park"
+          "park",
+          "theme_park",
+          "zoo"
         ],
         [
           "<=",
@@ -3527,7 +3535,7 @@
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "place",
-      "minzoom": 12,
+      "minzoom": 14,
       "filter": [
         "all",
         [
@@ -3551,7 +3559,7 @@
         "text-size": {
           "stops": [
             [
-              12,
+              14,
               8
             ],
             [
