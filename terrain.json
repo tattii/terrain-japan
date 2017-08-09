@@ -1565,7 +1565,7 @@
           "base": 1.5,
           "stops": [
             [
-              1,
+              14,
               1
             ],
             [
@@ -1579,8 +1579,8 @@
       },
       "type": "line",
       "source": "openmaptiles",
-      "source-layer": "transportation_name",
-      "minzoom": 12,
+      "source-layer": "transportation",
+      "minzoom": 13,
       "filter": [
         "all",
         [
@@ -1591,7 +1591,7 @@
         [
           "==",
           "class",
-          "path"
+          "pedestrian"
         ]
       ],
       "layout": {
