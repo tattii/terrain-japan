@@ -140,6 +140,36 @@
       }
     },
     {
+      "id": "green-areas",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "landuse",
+      "filter": [
+        "in",
+        "class",
+        "golf_course",
+        "theme_park",
+        "zoo"
+      ],
+      "layout": {},
+      "paint": {
+        "fill-color": "hsl(100, 59%, 81%)",
+        "fill-opacity": {
+          "base": 1,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "school",
       "type": "fill",
       "source": "openmaptiles",
