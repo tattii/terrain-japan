@@ -18,11 +18,11 @@ def process(src_dir, dst_dir):
     print len(files), 'files'
 
     if not os.path.exists(dst_dir): os.makedirs(dst_dir)
-    r = Parallel(n_jobs=2, verbose=10)(
+    r = Parallel(n_jobs=-1, verbose=10)(
         delayed(polygonize)(file, src_dir, dst_dir) for file in files)
 
 def main(src_dir, dst_dir):
-    for z in range(10, 11):
+    for z in range(3, 14):
         print 'z', z
         src = src_dir + '/z' + str(z) 
         dst = dst_dir + '/z' + str(z) 
