@@ -9,7 +9,7 @@ def polygonize(src_dir, dst_dir):
     files = os.listdir(src_dir)
     print len(files), 'files'
 
-    if not os.path.exists(dst_dir): os.mkdir(dst_dir)
+    if not os.path.exists(dst_dir): os.makedirs(dst_dir)
 
     for file in files:
         if file[-3:] == 'tif':
@@ -28,7 +28,8 @@ def polygonize1st(src_dir, dst_dir):
 
 
 def polygonize2nd(src_dir, dst_dir, mesh_1st):
-    for z in [12, 13, 14]:
+    #for z in [12, 13, 14]:
+    for z in [12, 13]:
         srcd = src_dir + '/z' + str(z)
         files = glob.glob(srcd + '/FG-GML-' + str(mesh_1st) + '-*.tif')
         dstd = dst_dir + '/z' + str(z)
@@ -43,6 +44,6 @@ def polygonize2nd(src_dir, dst_dir, mesh_1st):
             vectorize.vectorizeRaster(file, dst)
 
 if __name__ == '__main__':
-    polygonize1st('vdata/hillshade', 'vdata/polygon')
-    #polygonize2nd('vdata/hillshade', 'vdata/polygon', 5235)
+    polygonize1st('vdata/hillshade', 'vdata/polygon3')
+    polygonize2nd('vdata/hillshade', 'vdata/polygon3', 5235)
 
