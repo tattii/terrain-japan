@@ -3,10 +3,11 @@ import os, sys, subprocess, glob, shutil
 import math
 from osgeo import gdal
 
+gdalcache = '--config GDAL_CACHEMAX 8192 --config CHECK_DISK_FREE_SPACE NO'
 
 def scaleraster(file, dst, tsx, tsy, resampling='near'):
     # ty = 0 guessed from the computed resolution
-    command = 'gdalwarp -t_srs EPSG:3785 -r %s -tr %d %d %s %s' % (resampling, int(tsx), int(tsy), file, dst)
+    command = 'gdalwarp %s -t_srs EPSG:3785 -r %s -tr %d %d %s %s' % (gdalcache, resampling, int(tsx), int(tsy), file, dst)
     print command
     subprocess.call(command, shell=True)
 
@@ -22,7 +23,7 @@ def retile(file, dstd):
             ty = ty / 2.
         tx = math.ceil(tx)
         ty = math.ceil(ty)
-        command = 'gdal_retile.py -ps %d %d -targetDir %s %s' % (tx, ty, dstd, file)
+        command = 'gdal_retile.py %s -ps %d %d -targetDir %s %s' % (gdalcache, tx, ty, dstd, file)
         print command
         subprocess.call(command, shell=True)
 
@@ -52,7 +53,7 @@ def scale(src, dst_dir):
     retile(dst, dstd)
 
     # scaleup
-    for z in range(11, 14):
+    for z in range(11, 13):
         zs = 2 ** (z - 10)
         r = base / zs
         dst = dst_base + '/z' + str(z) + '-' + filename
@@ -72,5 +73,5 @@ def scale(src, dst_dir):
         retile(dst, dstd)
 
 if __name__ == '__main__':
-    scale(sys.argv[1], 'tdata/layer')
+    scale(sys.argv[1], 'tdata2/layer')
 

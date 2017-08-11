@@ -22,7 +22,7 @@ def process(src_dir, dst_dir):
         delayed(polygonize)(file, src_dir, dst_dir) for file in files)
 
 def main(src_dir, dst_dir):
-    for z in range(3, 14):
+    for z in range(3, 13):
         print 'z', z
         src = src_dir + '/z' + str(z) 
         dst = dst_dir + '/z' + str(z) 
@@ -31,5 +31,5 @@ def main(src_dir, dst_dir):
 
 
 if __name__ == '__main__':
-    main('tdata/layer', 'tdata/polygon')
+    main('tdata2/layer', 'tdata2/polygon')
 
