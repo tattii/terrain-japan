@@ -28,8 +28,9 @@
     },
     "landcover": {
       "type": "vector",
+      "maxzoom": 12,
       "tiles": [
-        "http://35.200.107.154:8001/landcover/tdata/vtile/{z}/{x}/{y}.pbf"
+        "http://35.200.107.154:8001/landcover/tdata2/vtile/{z}/{x}/{y}.pbf"
       ]
     }
   },
@@ -47,7 +48,7 @@
       "type": "fill",
       "source": "landcover",
       "source-layer": "landcover",
-      "maxzoom": 12,
+      "maxzoom": 14,
       "filter": [
         "==",
         "class",
@@ -77,7 +78,7 @@
       "type": "fill",
       "source": "landcover",
       "source-layer": "landcover",
-      "maxzoom": 12,
+      "maxzoom": 14,
       "filter": [
         "==",
         "class",
@@ -107,7 +108,7 @@
       "type": "fill",
       "source": "landcover",
       "source-layer": "landcover",
-      "maxzoom": 12,
+      "maxzoom": 14,
       "filter": [
         "==",
         "class",
@@ -137,7 +138,7 @@
       "type": "fill",
       "source": "landcover",
       "source-layer": "landcover",
-      "maxzoom": 12,
+      "maxzoom": 14,
       "filter": [
         "==",
         "class",
@@ -178,7 +179,7 @@
           "base": 1,
           "stops": [
             [
-              9,
+              7,
               0
             ],
             [
@@ -205,7 +206,7 @@
           "base": 1,
           "stops": [
             [
-              9,
+              7,
               0
             ],
             [
@@ -2984,8 +2985,8 @@
         "line-color": "rgb(255, 255, 255)",
         "line-width": 1.8,
         "line-dasharray": [
-          4,
-          4
+          6,
+          6
         ]
       }
     },
