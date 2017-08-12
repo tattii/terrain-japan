@@ -20,9 +20,9 @@ def scaleraster(file, dst, tx, ty):
 
 def retile(file, dstd, split):
     x, y = getsize(file)
-    tx = math.ceil(x / split)
-    ty = math.ceil(y / split)
-    command = 'gdal_retile.py -s_srs EPSG:3785 -ps %d %d -targetDir %s %s' % (tx, ty, dstd, file)
+    tx = math.ceil(float(x) / split)
+    ty = math.ceil(float(y) / split)
+    command = 'gdal_retile.py -ps %d %d -targetDir %s %s' % (tx, ty, dstd, file)
     print command
     subprocess.call(command, shell=True)
 
@@ -36,13 +36,15 @@ def getsize(file):
 
 def getextent(file):
     command = 'gdalinfo ' + file
+    #print command
     info = commands.getoutput(command)
+    #print info
 
-    match = re.search(r"Upper Left  \( (\d+\.\d+),  (\d+\.\d+)\)", str(info))
+    match = re.search(r"Upper Left  \((\d+\.\d+),\s(\d+\.\d+)\)", str(info))
     xmin = match.group(1)
     ymax = match.group(2)
 
-    match = re.search(r"Lower Right \( (\d+\.\d+),  (\d+\.\d+)\)", str(info))
+    match = re.search(r"Lower Right \((\d+\.\d+),\s(\d+\.\d+)\)", str(info))
     xmax = match.group(1)
     ymin = match.group(2)
 
@@ -55,30 +57,23 @@ def buildvrt(files, vrt):
 
 
 def hillshade(src, dst):
-    command = 'gdaldem hillshade -compute_edges -s 111120 ' + src + ' ' + dst
+    #command = 'gdaldem hillshade -compute_edges -s 111120 ' + src + ' ' + dst
+    command = 'gdaldem hillshade -compute_edges ' + src + ' ' + dst
     print command
     subprocess.call(command, shell=True)
 
 def extract(src, dst, ext):
-    command = 'gdalwarp -te %s %s %s' % (' '.join(ext), src, dst)
+    command = 'gdalwarp -te %s -te_srs EPSG:3785 %s %s' % (' '.join(ext), src, dst)
     print command
     subprocess.call(command, shell=True)
 
 
-def scalefiles(files, dst_dir, zooms):
-    print len(files), 'files'
+def scalefile(src, dst, scale):
+    x, y = getsize(src)
+    tx = x * scale
+    ty = y * scale
+    scaleraster(src, dst, tx, ty)
 
-    for file in files:
-        x, y = getsize(file)
-        for z in zooms:
-            dstd = dst_dir + '/z' + str(z)
-            if not os.path.exists(dstd): os.makedirs(dstd)
-            dst = dstd + '/' + os.path.basename(file)
-
-            scale = 2 ** (z - 13)
-            tx = x * scale
-            ty = y * scale
-            scaleraster(file, dst, tx, ty)
 
 def dstd(dst_dir, name, z):
     dst = dst_dir + '/%s/z%d/' % (name, z)
@@ -140,29 +135,51 @@ def merge_tile(file, dst_tile, dst_merge, split):
 
     return vrt
 
+def hillshade_tiles(dst_tile, dst_dir, z, split):
+    dst_merge = dstd(dst_dir, 'merge', z)
+    dst_hillshade = dstd(dst_dir, 'hillshade', z)
+
+    tiles = glob.glob(dst_tile + '/*.tif')
+    for tile in tiles:
+        merged_vrt = merge_tile(tile, dst_tile, dst_merge, split)
+        hillshade_tile(tile, merged_vrt, dst_merge, dst_hillshade)
+
+
+def scale_tiles(files, dst_dir, z, scale, split):
+    dst_base = dstd(dst_dir, 'base', z)
+    dst_tile = dstd(dst_dir, 'tile', z)
+
+    for file in files:
+        dst = dst_base + os.path.basename(file)[:-4] + '.tif'
+        scalefile(file, dst, scale)
+
+        if split != 1:
+            retile(dst, dst_tile, split)
+
+    hillshade_tiles(dst_tile, dst_dir, z, split)
+
+
 def base_tiles(files, dst_dir, z):
     dst_base = dstd(dst_dir, 'base', z)
     dst_tile = dstd(dst_dir, 'tile', z)
-    dst_merge = dstd(dst_dir, 'merge', z)
-    dst_hillshade = dstd(dst_dir, 'hillshade', z)
 
     for file in files:
         dst = dst_base + os.path.basename(file)[:-4] + '.tif'
         warpraster(file, dst)
 
-        retile(file, dst_tile, 4.)
+        retile(dst, dst_tile, 4)
 
-    tiles = glob.glob(dst_tile + '/*.tif')
-    for tile in tiles:
-        merged_vrt = merge_tile(tile, dst_tile, dst_merge, 4)
-        hillshade_tile(tile, merged_vrt, dst_merge, dst_hillshade)
+    hillshade_tiles(dst_tile, dst_dir, z, 4)
 
 
 def main(src_dir, dst_dir):
     files = glob.glob(src_dir + '/*.hgt')
     print len(files), 'files'
 
-    base_tiles(files, dst_dir, 12)
+    #base_tiles(files, dst_dir, 12)
+
+    scale_tiles(files, dst_dir, 13, 2, 8)
+    #scale_tiles(files, dst_dir, 14, 4, 16)
 
 
 if __name__ == '__main__':
