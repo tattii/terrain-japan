@@ -1,49 +1,35 @@
 # -*- coding: utf-8 -*-
 import os, glob
-import subprocess
+from joblib import Parallel, delayed
 
 import vectorize
 
 
-def polygonize(src_dir, dst_dir):
+def polygonize(src, src_dir, dst_dir):
+    dst = dst_dir + '/' + src[:-3] + 'json'
+    print dst
+    if src[-3:] != 'tif' or os.path.exists(dst): return
+
+    vectorize.vectorizeRaster(src_dir + '/' + src, dst)
+
+
+def process(src_dir, dst_dir):
     files = os.listdir(src_dir)
     print len(files), 'files'
 
     if not os.path.exists(dst_dir): os.makedirs(dst_dir)
+    r = Parallel(n_jobs=1, verbose=10)(
+        delayed(polygonize)(file, src_dir, dst_dir) for file in files)
 
-    for file in files:
-        if file[-3:] == 'tif':
-            src = src_dir + '/' + file
-            dst = dst_dir + '/' + file[:-3] + 'json'
-            print dst
-
-            vectorize.vectorizeRaster(src, dst)
-            
-def polygonize1st(src_dir, dst_dir):
-    for z in range(7, 12):
+def main(src_dir, dst_dir):
+    for z in range(12, 13):
+        print 'z', z
         src = src_dir + '/z' + str(z) 
         dst = dst_dir + '/z' + str(z) 
 
-        polygonize(src, dst)
+        process(src, dst)
 
-
-def polygonize2nd(src_dir, dst_dir, mesh_1st):
-    #for z in [12, 13, 14]:
-    for z in [12, 13]:
-        srcd = src_dir + '/z' + str(z)
-        files = glob.glob(srcd + '/FG-GML-' + str(mesh_1st) + '-*.tif')
-        dstd = dst_dir + '/z' + str(z)
-        if not os.path.exists(dstd): os.makedirs(dstd)
-        l = len(files)
-        i = 0
-
-        for file in files:
-            i += 1
-            dst = dstd + '/' + os.path.basename(file)[:-3] + 'json'
-            print i, '/', l, dst
-            vectorize.vectorizeRaster(file, dst)
 
 if __name__ == '__main__':
-    polygonize1st('vdata/hillshade', 'vdata/polygon3')
-    polygonize2nd('vdata/hillshade', 'vdata/polygon3', 5235)
+    main('sdata/hillshade', 'sdata/polygon')
 
