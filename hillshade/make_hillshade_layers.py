@@ -4,7 +4,7 @@ import math, re
 import commands, shutil
 from osgeo import gdal
 
-gdalcache = '--config GDAL_CACHEMAX 1024'
+gdalcache = '--config GDAL_CACHEMAX 8096'
 
 def warpraster(file, dst):
     command = 'gdalwarp -t_srs EPSG:3785 -r bilinear %s %s' % (file, dst)
@@ -215,29 +215,32 @@ def vrt_tiles(vrt, dst_dir, z):
     retile_auto(hillshaded, dst_hillshade)
 
 
-def main(src_dir, dst_dir):
+def main(src_dir, dst_dir, argv):
     files = glob.glob(src_dir + '/*.hgt')
     print len(files), 'files'
 
-    base_tiles(files, dst_dir, 12)
+    if argv == '12':
+        base_tiles(files, dst_dir, 12)
 
     # scale up
-    #scale_tiles(files, dst_dir, 13, 2, 8)
+    if argv == '13':
+        scale_tiles(files, dst_dir, 13, 2, 8)
     #scale_tiles(files, dst_dir, 14, 4, 16)
 
-    # scale down
-    #scale_tiles(files, dst_dir, 11, 1./2, 2)
-    #scale_tiles(files, dst_dir, 10, 1./4, 1)
+    if argv == '10':
+        # scale down
+        scale_tiles(files, dst_dir, 11, 1./2, 2)
+        scale_tiles(files, dst_dir, 10, 1./4, 1)
 
-    # vrt z10 tiles
-    vrt = dst_dir + '/z10-tiles.vrt'
-    vrt_files = glob.glob(dst_dir + '/tile/z10/*.tif')
-    buildvrt(vrt_files, vrt)
+        # vrt z10 tiles
+        vrt = dst_dir + '/z10-tiles.vrt'
+        vrt_files = glob.glob(dst_dir + '/tile/z10/*.tif')
+        buildvrt(vrt_files, vrt)
 
-    # merged scale down 3-9
-    for z in range(3, 10):
-        vrt_tiles(vrt, dst_dir, z)
+        # merged scale down 3-9
+        for z in range(3, 10):
+            vrt_tiles(vrt, dst_dir, z)
 
 if __name__ == '__main__':
-    main('srtm0', 'sdata')
+    main('srtm', 'sdata1', sys.argv[1])
 
