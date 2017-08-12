@@ -35,6 +35,7 @@
       ]
     }
   },
+  "sprite": "http://localhost:8001/sprite/sprite",
   "glyphs": "http://localhost:8001/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -3505,16 +3506,21 @@
         ],
         "visibility": "visible",
         "text-offset": [
-          0,
-          0.5
+          0.8,
+          0
         ],
-        "icon-size": 1,
-        "text-anchor": "top",
+        "icon-size": 0.8,
+        "text-anchor": "left",
         "text-field": "{name}",
-        "text-max-width": 8
+        "text-max-width": 8,
+        "symbol-placement": "point",
+        "symbol-spacing": 1000,
+        "icon-image": "rail",
+        "icon-rotation-alignment": "viewport",
+        "icon-padding": 2
       },
       "paint": {
-        "text-color": "#666",
+        "text-color": "#000032",
         "text-halo-width": 1,
         "text-halo-color": "rgba(255,255,255,0.75)",
         "text-halo-blur": 1
