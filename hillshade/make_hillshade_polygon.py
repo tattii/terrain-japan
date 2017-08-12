@@ -5,9 +5,9 @@ from joblib import Parallel, delayed
 import vectorize
 
 
-def polygonize(src, src_dir, dst_dir):
+def polygonize(src, src_dir, dst_dir, i, l):
     dst = dst_dir + '/' + src[:-3] + 'json'
-    print dst
+    print i, '/', l, dst
     if src[-3:] != 'tif' or os.path.exists(dst): return
 
     vectorize.vectorizeRaster(src_dir + '/' + src, dst)
@@ -16,10 +16,11 @@ def polygonize(src, src_dir, dst_dir):
 def process(src_dir, dst_dir):
     files = os.listdir(src_dir)
     print len(files), 'files'
+    l = len(files)
 
     if not os.path.exists(dst_dir): os.makedirs(dst_dir)
     r = Parallel(n_jobs=1, verbose=10)(
-        delayed(polygonize)(file, src_dir, dst_dir) for file in files)
+        delayed(polygonize)(file, src_dir, dst_dir, i, l) for i, file in enumerate(files))
 
 def main(src_dir, dst_dir):
     for z in range(12, 13):
