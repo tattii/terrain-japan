@@ -134,7 +134,10 @@ def tile_coord(dst_tile, lat, lon, x, y, split, dx, dy):
         y -= split
         lat -= 1
 
-    file = dst_tile + 'N%dE%d_%d_%d.tif' % (lat, lon, y, x)
+    if split >= 10:
+        file = dst_tile + 'N%dE%d_%02d_%02d.tif' % (lat, lon, y, x)
+    else:
+        file = dst_tile + 'N%dE%d_%d_%d.tif' % (lat, lon, y, x)
     if os.path.exists(file):
         return file
 
@@ -216,7 +219,7 @@ def main(src_dir, dst_dir):
     files = glob.glob(src_dir + '/*.hgt')
     print len(files), 'files'
 
-    #base_tiles(files, dst_dir, 12)
+    base_tiles(files, dst_dir, 12)
 
     # scale up
     #scale_tiles(files, dst_dir, 13, 2, 8)
