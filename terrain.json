@@ -2993,6 +2993,62 @@
       }
     },
     {
+      "id": "railway-bullet-bg",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "railway",
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "bullet"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "rgb(132, 185, 203)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "railway-bullet-dashline",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "railway",
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "bullet"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "rgb(255, 255, 255)",
+        "line-width": 1.8,
+        "line-dasharray": [
+          6,
+          6
+        ]
+      }
+    },
+    {
       "id": "admin-3-4-boundaries-bg",
       "type": "line",
       "source": "openmaptiles",
@@ -3752,6 +3808,7 @@
       ],
       "layout": {
         "symbol-placement": "line",
+        "symbol-spacing": 500,
         "text-field": "{name}",
         "text-font": [
           "migmix1p-regular"
@@ -3930,7 +3987,7 @@
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "place",
-      "minzoom": 8,
+      "minzoom": 10,
       "filter": [
         "all",
         [
