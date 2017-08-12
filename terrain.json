@@ -3338,6 +3338,53 @@
       }
     },
     {
+      "id": "place_hamlet",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "place",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "==",
+          "class",
+          "hamlet"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "migmix1p-regular"
+        ],
+        "text-max-width": 6,
+        "text-size": {
+          "stops": [
+            [
+              14,
+              8
+            ],
+            [
+              14.5,
+              12
+            ]
+          ]
+        },
+        "visibility": "visible",
+        "text-anchor": "center"
+      },
+      "paint": {
+        "text-color": "hsl(0, 10%, 25%)",
+        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-blur": 0,
+        "text-halo-width": 1
+      }
+    },
+    {
       "id": "poi_label",
       "type": "symbol",
       "source": "openmaptiles",
@@ -3372,7 +3419,7 @@
         "visibility": "visible",
         "text-offset": [
           0,
-          0.5
+          0
         ],
         "icon-size": 1,
         "text-anchor": "top",
@@ -3423,7 +3470,7 @@
         "visibility": "visible",
         "text-offset": [
           0,
-          0.5
+          0
         ],
         "icon-size": 1,
         "text-anchor": "top",
@@ -3471,7 +3518,7 @@
         "visibility": "visible",
         "text-offset": [
           0,
-          0.5
+          0
         ],
         "icon-size": 1,
         "text-anchor": "top",
@@ -3480,47 +3527,6 @@
       },
       "paint": {
         "text-color": "#666",
-        "text-halo-width": 1,
-        "text-halo-color": "rgba(255,255,255,0.75)",
-        "text-halo-blur": 1
-      }
-    },
-    {
-      "id": "poi_station",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "railway",
-      "minzoom": 5,
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ]
-      ],
-      "layout": {
-        "text-size": 11,
-        "text-font": [
-          "migmix1p-regular"
-        ],
-        "visibility": "visible",
-        "text-offset": [
-          0.8,
-          0
-        ],
-        "icon-size": 0.8,
-        "text-anchor": "left",
-        "text-field": "{name}",
-        "text-max-width": 8,
-        "symbol-placement": "point",
-        "symbol-spacing": 1000,
-        "icon-image": "rail",
-        "icon-rotation-alignment": "viewport",
-        "icon-padding": 2
-      },
-      "paint": {
-        "text-color": "#000032",
         "text-halo-width": 1,
         "text-halo-color": "rgba(255,255,255,0.75)",
         "text-halo-blur": 1
@@ -3563,6 +3569,47 @@
         "text-color": "#000",
         "text-halo-color": "hsl(0, 0%, 100%)",
         "text-halo-width": 2
+      }
+    },
+    {
+      "id": "poi_station",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "railway",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ]
+      ],
+      "layout": {
+        "text-size": 11,
+        "text-font": [
+          "migmix1p-regular"
+        ],
+        "visibility": "visible",
+        "text-offset": [
+          0.8,
+          0
+        ],
+        "icon-size": 0.8,
+        "text-anchor": "left",
+        "text-field": "{name}",
+        "text-max-width": 8,
+        "symbol-placement": "point",
+        "symbol-spacing": 1000,
+        "icon-image": "rail",
+        "icon-rotation-alignment": "viewport",
+        "icon-padding": 2
+      },
+      "paint": {
+        "text-color": "#000032",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255,255,255,0.75)",
+        "text-halo-blur": 1
       }
     },
     {
@@ -3671,53 +3718,7 @@
         "text-halo-width": 2
       }
     },
-    {
-      "id": "place_hamlet",
-      "type": "symbol",
-      "source": "openmaptiles",
-      "source-layer": "place",
-      "minzoom": 14,
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          "==",
-          "class",
-          "hamlet"
-        ]
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "migmix1p-regular"
-        ],
-        "text-max-width": 6,
-        "text-size": {
-          "stops": [
-            [
-              14,
-              8
-            ],
-            [
-              14.5,
-              12
-            ]
-          ]
-        },
-        "visibility": "visible",
-        "text-anchor": "center"
-      },
-      "paint": {
-        "text-color": "hsl(0, 10%, 25%)",
-        "text-halo-color": "hsl(0, 0%, 100%)",
-        "text-halo-blur": 0,
-        "text-halo-width": 1
-      }
-    },
+
     {
       "id": "place_suburb",
       "type": "symbol",
