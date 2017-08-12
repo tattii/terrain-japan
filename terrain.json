@@ -3533,14 +3533,22 @@
       }
     },
     {
-      "id": "road_major_label",
+      "id": "road_minor_label",
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "transportation_name",
       "filter": [
-        "==",
-        "$type",
-        "LineString"
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "minor"
+        ]
       ],
       "layout": {
         "symbol-placement": "line",
@@ -3549,6 +3557,205 @@
           "migmix1p-regular"
         ],
         "text-transform": "uppercase",
+        "text-letter-spacing": 0.1,
+        "text-size": {
+          "base": 1.4,
+          "stops": [
+            [
+              10,
+              8
+            ],
+            [
+              20,
+              14
+            ]
+          ]
+        },
+        "text-rotation-alignment": "map"
+      },
+      "paint": {
+        "text-color": "#000",
+        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-width": 2
+      }
+    },
+    {
+      "id": "road_primary_label",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "transportation_name",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "primary"
+        ]
+      ],
+      "layout": {
+        "text-size": 8,
+        "icon-image": "jp-pref-route-{ref_length}",
+        "icon-rotation-alignment": "viewport",
+        "text-rotation-alignment": "viewport",
+        "text-max-angle": 0,
+        "symbol-spacing": 500,
+        "symbol-placement": "line",
+        "text-field": "{ref}",
+        "text-font": [
+          "migmix1p-regular"
+        ],
+        "text-padding": 2,
+        "text-letter-spacing": 0.05,
+        "icon-padding": 2
+      },
+      "paint": {
+        "text-color": "hsl(230, 33%, 99%)",
+        "icon-halo-color": "rgba(0, 0, 0, 1)",
+        "icon-halo-width": 1,
+        "text-opacity": 1,
+        "icon-color": "white",
+        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "road_major2_label",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "transportation_name",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "trunk"
+        ],
+        [
+          "==",
+          "ref_length",
+          3
+        ]
+      ],
+      "layout": {
+        "text-size": 7,
+        "icon-image": "jp-truck-{ref_length}",
+        "icon-rotation-alignment": "viewport",
+        "text-rotation-alignment": "viewport",
+        "text-max-angle": 38,
+        "symbol-spacing": 500,
+        "symbol-placement": "line",
+        "text-field": "{ref}",
+        "text-font": [
+          "migmix1p-regular"
+        ],
+        "text-offset": [
+          0,
+          -0.15
+        ],
+        "text-padding": 2,
+        "text-letter-spacing": 0.05,
+        "icon-padding": 2
+      },
+      "paint": {
+        "text-color": "hsl(230, 33%, 99%)",
+        "icon-halo-color": "rgba(0, 0, 0, 1)",
+        "icon-halo-width": 1,
+        "text-opacity": 1,
+        "icon-color": "white",
+        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "road_major1_label",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "transportation_name",
+      "minzoom": 10,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "trunk"
+        ],
+        [
+          "<=",
+          "ref_length",
+          2
+        ]
+      ],
+      "layout": {
+        "text-size": 9,
+        "icon-image": "jp-truck-{ref_length}",
+        "icon-rotation-alignment": "viewport",
+        "text-rotation-alignment": "viewport",
+        "text-max-angle": 38,
+        "symbol-spacing": 300,
+        "symbol-placement": "line",
+        "text-field": "{ref}",
+        "text-font": [
+          "migmix1p-regular"
+        ],
+        "text-offset": [
+          0,
+          -0.15
+        ],
+        "text-padding": 2,
+        "text-letter-spacing": 0.05,
+        "icon-padding": 2
+      },
+      "paint": {
+        "text-color": "hsl(230, 33%, 99%)",
+        "icon-halo-color": "rgba(0, 0, 0, 1)",
+        "icon-halo-width": 1,
+        "text-opacity": 1,
+        "icon-color": "white",
+        "text-halo-color": "hsl(0, 0%, 100%)",
+        "text-halo-width": 0
+      }
+    },
+    {
+      "id": "road_motorway_label",
+      "type": "symbol",
+      "source": "openmaptiles",
+      "source-layer": "transportation_name",
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "==",
+          "class",
+          "motorway"
+        ]
+      ],
+      "layout": {
+        "symbol-placement": "line",
+        "text-field": "{name}",
+        "text-font": [
+          "migmix1p-regular"
+        ],
         "text-letter-spacing": 0.1,
         "text-size": {
           "base": 1.4,

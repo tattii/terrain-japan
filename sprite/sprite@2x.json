@@ -30,15 +30,15 @@
   "jp-truck-2": {
     "height": 32,
     "pixelRatio": 2,
-    "width": 33,
-    "x": 101,
-    "y": 0
+    "width": 44,
+    "x": 0,
+    "y": 66
   },
   "jp-truck-3": {
     "height": 32,
     "pixelRatio": 2,
     "width": 44,
-    "x": 0,
+    "x": 44,
     "y": 66
   },
   "rail": {
