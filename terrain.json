@@ -536,11 +536,11 @@
         "fill-opacity": {
           "stops": [
             [
-              15,
+              13,
               0.15
             ],
             [
-              18,
+              16,
               0
             ]
           ]
@@ -566,11 +566,11 @@
         "fill-opacity": {
           "stops": [
             [
-              15,
+              13,
               0.15
             ],
             [
-              18,
+              16,
               0
             ]
           ]
@@ -597,11 +597,11 @@
         "fill-opacity": {
           "stops": [
             [
-              15,
+              13,
               0.07
             ],
             [
-              17,
+              16,
               0
             ]
           ]
@@ -627,11 +627,11 @@
         "fill-opacity": {
           "stops": [
             [
-              15,
+              13,
               0.07
             ],
             [
-              17,
+              16,
               0
             ]
           ]
@@ -657,11 +657,11 @@
         "fill-opacity": {
           "stops": [
             [
-              15,
+              13,
               0.08
             ],
             [
-              17,
+              16,
               0
             ]
           ]
@@ -688,11 +688,11 @@
         "fill-opacity": {
           "stops": [
             [
-              15,
+              13,
               0.08
             ],
             [
-              17,
+              16,
               0
             ]
           ]
@@ -3438,7 +3438,7 @@
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "poi",
-      "minzoom": 5,
+      "minzoom": 14,
       "filter": [
         "all",
         [
@@ -3718,7 +3718,6 @@
         "text-halo-width": 2
       }
     },
-
     {
       "id": "place_suburb",
       "type": "symbol",
