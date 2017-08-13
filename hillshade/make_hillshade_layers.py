@@ -14,7 +14,7 @@ def warpraster(file, dst):
 
 def scaleraster(file, dst, tx, ty):
     # ty = 0 guessed from the computed resolution
-    command = 'gdalwarp -t_srs EPSG:3785 -r bilinear -ts %d %d %s %s' % (int(tx), 0, file, dst)
+    command = 'gdalwarp -t_srs EPSG:3785 -r bilinear -et 0.01 -ts %d %d %s %s' % (int(tx), 0, file, dst)
     print command
     subprocess.call(command, shell=True)
 
@@ -56,6 +56,10 @@ def buildvrt(files, vrt):
     print command
     subprocess.call(command, shell=True)
 
+def mergefiles(files, dst):
+    command = 'gdal_merge.py -o ' + dst + ' ' + ' '.join(files)
+    print command
+    subprocess.call(command, shell=True)
 
 def hillshade(src, dst):
     #command = 'gdaldem hillshade -compute_edges -s 111120 ' + src + ' ' + dst
@@ -71,8 +75,8 @@ def extract(src, dst, ext):
 
 def scalefile(src, dst, scale):
     x, y = getsize(src)
-    tx = x * scale
-    ty = y * scale
+    tx = math.ceil(x * scale)
+    ty = math.ceil(y * scale)
     scaleraster(src, dst, tx, ty)
 
 
@@ -229,18 +233,19 @@ def main(src_dir, dst_dir, argv):
 
     if argv == '10':
         # scale down
-        scale_tiles(files, dst_dir, 11, 1./2, 2)
+        #scale_tiles(files, dst_dir, 11, 1./2, 2)
         scale_tiles(files, dst_dir, 10, 1./4, 1)
 
         # vrt z10 tiles
         vrt = dst_dir + '/z10-tiles.vrt'
         vrt_files = glob.glob(dst_dir + '/tile/z10/*.tif')
-        buildvrt(vrt_files, vrt)
+        #buildvrt(vrt_files, vrt)
+        mergefiles(vrt_files, vrt)
 
         # merged scale down 3-9
         for z in range(3, 10):
             vrt_tiles(vrt, dst_dir, z)
 
 if __name__ == '__main__':
-    main('srtm', 'sdata1', sys.argv[1])
+    main('srtm', 'sdata3', sys.argv[1])
 
