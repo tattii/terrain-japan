@@ -19,11 +19,11 @@ def process(src_dir, dst_dir):
     l = len(files)
 
     if not os.path.exists(dst_dir): os.makedirs(dst_dir)
-    r = Parallel(n_jobs=1, verbose=10)(
+    r = Parallel(n_jobs=-1, verbose=10)(
         delayed(polygonize)(file, src_dir, dst_dir, i, l) for i, file in enumerate(files))
 
 def main(src_dir, dst_dir):
-    for z in range(12, 13):
+    for z in range(3, 11):
         print 'z', z
         src = src_dir + '/z' + str(z) 
         dst = dst_dir + '/z' + str(z) 
@@ -32,5 +32,5 @@ def main(src_dir, dst_dir):
 
 
 if __name__ == '__main__':
-    main('sdata/hillshade', 'sdata/polygon')
+    main('sdata3/hillshade', 'sdata3/polygon')
 

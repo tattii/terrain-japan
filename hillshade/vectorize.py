@@ -111,7 +111,7 @@ def vectorizeRaster(infile, outfile=None, nosimple=False):
     # mapbox-terrain-v2 levels
     # https://www.mapbox.com/vector-tiles/mapbox-terrain/#hillshade
     #classifiers = [56, 67, 78, 89, 90, 94]
-    classifiers = [80, 100, 130, 175, 190, 210]
+    classifiers = [80, 100, 130, 170, 190, 210]
     classRas, breaks = classifyManual(inarr, np.array(classifiers).astype(inarr.dtype))
 
     #print classRas, breaks

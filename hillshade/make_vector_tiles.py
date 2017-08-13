@@ -20,6 +20,6 @@ def vtile(src_dir, dst_dir):
         subprocess.call(mv, shell=True)
 
 if __name__ == '__main__':
-    vtile('sdata/polygon', 'sdata/vtile')
+    vtile('sdata1/polygon', 'sdata1/vtile')
 
 
