@@ -1,4 +1,25 @@
 {
+  "dot-10": {
+    "height": 10,
+    "pixelRatio": 1,
+    "width": 10,
+    "x": 55,
+    "y": 33
+  },
+  "dot-11": {
+    "height": 11,
+    "pixelRatio": 1,
+    "width": 11,
+    "x": 44,
+    "y": 33
+  },
+  "dot-9": {
+    "height": 9,
+    "pixelRatio": 1,
+    "width": 9,
+    "x": 50,
+    "y": 0
+  },
   "jp-pref-route-1": {
     "height": 16,
     "pixelRatio": 1,

@@ -4145,8 +4145,41 @@
               12
             ],
             [
-              8,
+              12,
               16
+            ]
+          ]
+        },
+        "icon-image": "dot-10",
+        "text-offset": {
+          "base": 1,
+          "stops": [
+            [
+              7.99,
+              [
+                0,
+                -0.25
+              ]
+            ],
+            [
+              8,
+              [
+                0,
+                0
+              ]
+            ]
+          ]
+        },
+        "text-anchor": {
+          "base": 1,
+          "stops": [
+            [
+              7,
+              "bottom"
+            ],
+            [
+              8,
+              "center"
             ]
           ]
         }
@@ -4154,8 +4187,21 @@
       "paint": {
         "text-color": "hsl(0, 0%, 0%)",
         "text-halo-color": "hsla(0, 0%, 100%, 0.75)",
-        "text-halo-blur": 0,
-        "text-halo-width": 2
+        "text-halo-blur": 0.2,
+        "text-halo-width": 1.5,
+        "icon-opacity": {
+          "base": 1,
+          "stops": [
+            [
+              7.99,
+              1
+            ],
+            [
+              8,
+              0
+            ]
+          ]
+        }
       }
     }
   ],
