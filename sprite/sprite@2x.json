@@ -1,79 +1,135 @@
 {
+  "airport-15": {
+    "height": 42,
+    "pixelRatio": 2,
+    "width": 42,
+    "x": 0,
+    "y": 0
+  },
   "dot-10": {
     "height": 20,
     "pixelRatio": 2,
     "width": 20,
-    "x": 110,
-    "y": 66
+    "x": 228,
+    "y": 76
   },
   "dot-11": {
     "height": 22,
     "pixelRatio": 2,
     "width": 22,
-    "x": 88,
-    "y": 66
+    "x": 206,
+    "y": 76
   },
   "dot-9": {
     "height": 18,
     "pixelRatio": 2,
     "width": 18,
-    "x": 101,
-    "y": 0
+    "x": 248,
+    "y": 76
   },
   "jp-pref-route-1": {
     "height": 32,
     "pixelRatio": 2,
     "width": 36,
-    "x": 0,
-    "y": 34
+    "x": 68,
+    "y": 42
+  },
+  "jp-pref-route-1-gray": {
+    "height": 32,
+    "pixelRatio": 2,
+    "width": 36,
+    "x": 104,
+    "y": 42
   },
   "jp-pref-route-2": {
     "height": 32,
     "pixelRatio": 2,
     "width": 36,
-    "x": 36,
-    "y": 34
+    "x": 76,
+    "y": 0
+  },
+  "jp-pref-route-2-gray": {
+    "height": 32,
+    "pixelRatio": 2,
+    "width": 36,
+    "x": 112,
+    "y": 0
   },
   "jp-pref-route-3": {
     "height": 32,
     "pixelRatio": 2,
     "width": 48,
-    "x": 72,
-    "y": 34
+    "x": 0,
+    "y": 76
+  },
+  "jp-pref-route-3-gray": {
+    "height": 32,
+    "pixelRatio": 2,
+    "width": 48,
+    "x": 48,
+    "y": 76
   },
   "jp-truck-1": {
     "height": 32,
     "pixelRatio": 2,
     "width": 33,
-    "x": 68,
-    "y": 0
+    "x": 96,
+    "y": 76
+  },
+  "jp-truck-1-gray": {
+    "height": 32,
+    "pixelRatio": 2,
+    "width": 33,
+    "x": 129,
+    "y": 76
   },
   "jp-truck-2": {
     "height": 32,
     "pixelRatio": 2,
     "width": 44,
     "x": 0,
-    "y": 66
+    "y": 108
+  },
+  "jp-truck-2-gray": {
+    "height": 32,
+    "pixelRatio": 2,
+    "width": 44,
+    "x": 44,
+    "y": 108
   },
   "jp-truck-3": {
     "height": 32,
     "pixelRatio": 2,
     "width": 44,
-    "x": 44,
-    "y": 66
+    "x": 88,
+    "y": 108
+  },
+  "jp-truck-3-gray": {
+    "height": 32,
+    "pixelRatio": 2,
+    "width": 44,
+    "x": 162,
+    "y": 76
   },
   "rail": {
     "height": 34,
     "pixelRatio": 2,
     "width": 34,
-    "x": 0,
+    "x": 42,
     "y": 0
   },
   "rail-metro": {
     "height": 34,
     "pixelRatio": 2,
     "width": 34,
+    "x": 0,
+    "y": 42
+  },
+  "rail2": {
+    "height": 34,
+    "pixelRatio": 2,
+    "width": 34,
     "x": 34,
-    "y": 0
+    "y": 42
   }
 }

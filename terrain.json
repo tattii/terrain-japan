@@ -3824,7 +3824,7 @@
           0
         ],
         "icon-size": 1,
-        "text-anchor": "top",
+        "text-anchor": "center",
         "text-field": "{name}",
         "text-max-width": 8
       },
