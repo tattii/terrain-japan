@@ -10,6 +10,10 @@ for (i in geojson.features){
 	var feature = geojson.features[i];
 	var name = geojson.features[i].properties.NAME;
 
+	if (name.match("旅客鉄道")){
+		name = name.replace(/.*旅客鉄道/, "JR");
+	}
+
 	if (name.match("新幹線") || name.match("JR")){
 		//console.log(name);
 		if (!railway[name]){
