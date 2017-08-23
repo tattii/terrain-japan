@@ -5,13 +5,17 @@ var json = fs.readFileSync("railway2/railway.geojson");
 var geojson = JSON.parse(json);
 
 var railway = {};
+var railway_prop = {};
 for (i in geojson.features){
 	var feature = geojson.features[i];
 	var name = geojson.features[i].properties.NAME;
 
 	if (name.match("新幹線") || name.match("JR")){
 		//console.log(name);
-		if (!railway[name]) railway[name] = [];
+		if (!railway[name]){
+			railway[name] = [];
+			railway_prop[name] = feature.properties;
+		}
 		railway[name].push([feature.geometry.coordinates]);
 	}
 }
@@ -45,6 +49,7 @@ for (name in railway){
 
 var data = {
 	type: "FeatureCollection",
+	src: geojson.crs,
 	features: []
 };
 
@@ -56,7 +61,8 @@ for (name in matched){
 			geometry: {
 				type: "LineString",
 				coordinates: line[m]
-			}
+			},
+			properties: railway_prop[name]
 		});
 	}
 }
