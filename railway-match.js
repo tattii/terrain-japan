@@ -21,6 +21,10 @@ var matched = {};
 for (name in railway){
 	matched[name] = [];
 	var lines = railway[name];
+
+	// sort with length
+	lines.sort(function(a, b){ return b[0].length - a[0].length });
+
 	for (l in lines){
 		if (l == 0){
 			matched[name] = lines[0];
