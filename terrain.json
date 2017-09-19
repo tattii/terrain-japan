@@ -18,25 +18,19 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "http://35.200.41.15:8080/data/v3.json"
+      "url": "/data/openmaptiles.json"
     },
     "hillshade": {
       "type": "vector",
-      "maxzoom": 13,
-      "tiles": [
-        "http://35.200.107.154:8002/terrain-japan/hillshade/sdata3/vtile/{z}/{x}/{y}.pbf"
-      ]
+      "url": "/data/hillshade.json"
     },
     "landcover": {
       "type": "vector",
-      "maxzoom": 12,
-      "tiles": [
-        "http://35.200.107.154:8002/terrain-japan/landcover/tdata2/vtile/{z}/{x}/{y}.pbf"
-      ]
+      "url": "/data/landcover.json"
     }
   },
-  "sprite": "http://35.200.107.154:8002/public/sprite/sprite",
-  "glyphs": "http://35.200.107.154:8002/public/fonts/{fontstack}/{range}.pbf",
+  "sprite": "sprite",
+  "glyphs": "/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
@@ -3508,7 +3502,7 @@
       ],
       "layout": {
         "text-size": 8,
-        "icon-image": "jp-pref-route-{ref_length}",
+        "icon-image": "jp-pref-route-{ref_length}-gray",
         "icon-rotation-alignment": "viewport",
         "text-rotation-alignment": "viewport",
         "text-max-angle": 0,
@@ -3558,7 +3552,7 @@
       ],
       "layout": {
         "text-size": 7,
-        "icon-image": "jp-truck-{ref_length}",
+        "icon-image": "jp-truck-{ref_length}-gray",
         "icon-rotation-alignment": "viewport",
         "text-rotation-alignment": "viewport",
         "text-max-angle": 38,
@@ -3612,7 +3606,7 @@
       ],
       "layout": {
         "text-size": 9,
-        "icon-image": "jp-truck-{ref_length}",
+        "icon-image": "jp-truck-{ref_length}-gray",
         "icon-rotation-alignment": "viewport",
         "text-rotation-alignment": "viewport",
         "text-max-angle": 38,
@@ -3865,7 +3859,7 @@
         "text-max-width": 8,
         "symbol-placement": "point",
         "symbol-spacing": 1000,
-        "icon-image": "rail",
+        "icon-image": "rail2",
         "icon-rotation-alignment": "viewport",
         "icon-padding": 2
       },

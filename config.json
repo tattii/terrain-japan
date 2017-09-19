@@ -1,0 +1,27 @@
+{
+	"options": {
+		"paths": {
+			"root": "",
+			"fonts": "fonts",
+			"sprites": "sprite",
+			"styles": "",
+			"mbtiles": ""
+		}
+	},
+	"styles": {
+		"terrain": {
+			"style": "terrain.json"
+		}
+	},
+	"data": {
+		"openmaptiles": {
+			"mbtiles": "japan.mbtiles"
+		},
+		"hillshade": {
+			"mbtiles": "hillshade.mbtiles"
+		},
+		"landcover": {
+			"mbtiles": "landcover.mbtiles"
+		}
+	}
+}
