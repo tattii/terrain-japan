@@ -6,11 +6,19 @@
 			"sprites": "sprite",
 			"styles": "",
 			"mbtiles": ""
-		}
+		},
+		"formatQuality": {
+			"pngQuantization": false,
+			"png": 98
+		},
+		"maxSize": 2048,
+		"pbfAlias": "pbf",
+		"serveStaticMaps": true
 	},
 	"styles": {
 		"terrain": {
-			"style": "terrain.json"
+			"style": "terrain.json",
+			"tilejson": {}
 		}
 	},
 	"data": {

@@ -18,19 +18,19 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "/data/openmaptiles.json"
+      "url": "mbtiles://{openmaptiles}"
     },
     "hillshade": {
       "type": "vector",
-      "url": "/data/hillshade.json"
+      "url": "mbtiles://{hillshade}"
     },
     "landcover": {
       "type": "vector",
-      "url": "/data/landcover.json"
+      "url": "mbtiles://{landcover}"
     }
   },
   "sprite": "sprite",
-  "glyphs": "/fonts/{fontstack}/{range}.pbf",
+  "glyphs": "{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
