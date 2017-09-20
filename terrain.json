@@ -214,39 +214,6 @@
       }
     },
     {
-      "id": "national_park",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "park",
-      "paint": {
-        "fill-color": "hsl(100, 59%, 76%)",
-        "fill-opacity": 0.75
-      }
-    },
-    {
-      "id": "national_park_outline",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "park",
-      "layout": {},
-      "paint": {
-        "line-color": "hsl(100, 40%, 67%)",
-        "line-width": {
-          "base": 1,
-          "stops": [
-            [
-              9,
-              0.75
-            ],
-            [
-              12,
-              1
-            ]
-          ]
-        }
-      }
-    },
-    {
       "id": "park",
       "type": "fill",
       "source": "openmaptiles",
@@ -3323,54 +3290,6 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "hsl(230, 8%, 51%)",
-        "line-width": {
-          "base": 1,
-          "stops": [
-            [
-              3,
-              0.5
-            ],
-            [
-              10,
-              2
-            ]
-          ]
-        }
-      }
-    },
-    {
-      "id": "admin-2-boundaries-dispute",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "boundary",
-      "minzoom": 1,
-      "filter": [
-        "all",
-        [
-          "==",
-          "admin_level",
-          2
-        ],
-        [
-          "==",
-          "disputed",
-          1
-        ],
-        [
-          "==",
-          "maritime",
-          0
-        ]
-      ],
-      "layout": {
-        "line-join": "round"
-      },
-      "paint": {
-        "line-dasharray": [
-          1.5,
-          1.5
-        ],
         "line-color": "hsl(230, 8%, 51%)",
         "line-width": {
           "base": 1,
