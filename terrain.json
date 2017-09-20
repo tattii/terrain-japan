@@ -3425,7 +3425,8 @@
           ]
         },
         "visibility": "visible",
-        "text-anchor": "center"
+        "text-anchor": "center",
+        "symbol-avoid-edges": true
       },
       "paint": {
         "text-color": "hsl(0, 10%, 25%)",
@@ -3454,6 +3455,7 @@
       ],
       "layout": {
         "symbol-placement": "line",
+        "symbol-avoid-edges": true,
         "text-field": "{name}",
         "text-font": [
           "migmix1p-regular"
@@ -3507,6 +3509,7 @@
         "text-rotation-alignment": "viewport",
         "text-max-angle": 0,
         "symbol-spacing": 500,
+        "symbol-avoid-edges": true,
         "symbol-placement": "line",
         "text-field": "{ref}",
         "text-font": [
@@ -3557,6 +3560,7 @@
         "text-rotation-alignment": "viewport",
         "text-max-angle": 38,
         "symbol-spacing": 500,
+        "symbol-avoid-edges": true,
         "symbol-placement": "line",
         "text-field": "{ref}",
         "text-font": [
@@ -3611,6 +3615,7 @@
         "text-rotation-alignment": "viewport",
         "text-max-angle": 38,
         "symbol-spacing": 300,
+        "symbol-avoid-edges": true,
         "symbol-placement": "line",
         "text-field": "{ref}",
         "text-font": [
@@ -3721,7 +3726,8 @@
         "icon-size": 1,
         "text-anchor": "top",
         "text-field": "{name}",
-        "text-max-width": 8
+        "text-max-width": 8,
+        "symbol-avoid-edges": true
       },
       "paint": {
         "text-color": "#666",
@@ -3772,7 +3778,8 @@
         "icon-size": 1,
         "text-anchor": "top",
         "text-field": "{name}",
-        "text-max-width": 8
+        "text-max-width": 8,
+        "symbol-avoid-edges": true
       },
       "paint": {
         "text-color": "#666",
@@ -3820,7 +3827,8 @@
         "icon-size": 1,
         "text-anchor": "center",
         "text-field": "{name}",
-        "text-max-width": 8
+        "text-max-width": 8,
+        "symbol-avoid-edges": true
       },
       "paint": {
         "text-color": "#666",
@@ -3859,6 +3867,7 @@
         "text-max-width": 8,
         "symbol-placement": "point",
         "symbol-spacing": 1000,
+        "symbol-avoid-edges": true,
         "icon-image": "rail2",
         "icon-rotation-alignment": "viewport",
         "icon-padding": 2
@@ -3894,7 +3903,8 @@
         "text-anchor": "left",
         "text-field": "{name}",
         "text-max-width": 8,
-        "symbol-placement": "point"
+        "symbol-placement": "point",
+        "symbol-avoid-edges": true
       },
       "paint": {
         "text-color": "#000032",
