@@ -23,10 +23,11 @@
     <div id="map4"></div>
 
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
-	<script src="lib/L.Map.Sync.js"></script>
 	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.js"></script>
-	<script src="lib/leaflet-mapbox-gl.js"></script>
 	<script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
+	<script src="lib/leaflet-mapbox-gl.js"></script>
+	<script src="lib/leaflet-hash.js"></script>
+	<script src="lib/L.Map.Sync.js"></script>
 	<script>
 		var center = [36.5, 137.6];
 		var zoom = 5;
@@ -88,6 +89,9 @@
 				zoomControl: false
 			})
 			.addLayer(yahoo);
+
+		// leaflet hash
+		var hash = new L.Hash(map1);
 
 		// Leaflet.Sync
 		// https://github.com/jieter/Leaflet.Sync
