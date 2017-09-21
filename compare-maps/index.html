@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-	<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.css" rel='stylesheet' />
+	<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.css" rel='stylesheet' />
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzwV7lJKoLXYJzmdBjEJsrmOeiIk3WcuU" async defer></script>
 
     <style type="text/css">
@@ -24,7 +24,7 @@
 
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
 	<script src="lib/L.Map.Sync.js"></script>
-	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.35.1/mapbox-gl.js"></script>
+	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.js"></script>
 	<script src="lib/leaflet-mapbox-gl.js"></script>
 	<script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
 	<script>
@@ -34,7 +34,8 @@
 		// Mapbox GL
 		// https://github.com/mapbox/mapbox-gl-leaflet
 		var gl = L.mapboxGL({
-			style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
+			//style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
+			style: 'http://localhost:8081/styles/terrain/style.json', 
 			accessToken: 'no-token'
 		});
 		var map1 = new L.map('map1', {
