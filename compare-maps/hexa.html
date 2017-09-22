@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.css" rel='stylesheet' />
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzwV7lJKoLXYJzmdBjEJsrmOeiIk3WcuU" async defer></script>
+
+    <style type="text/css">
+        html, body { width: 100%; height: 100%; margin: 0; }
+        #map1 { position:absolute; top:0;    left:0;  width: calc(100%/3); height: 50%; }
+        #map2 { position:absolute; bottom:0; left:0;  width: calc(100%/3); height: 50%; }
+        #map3 { position:absolute; top:0;    left:calc(100%/3);  width: calc(100%/3); height: 50%; }
+        #map4 { position:absolute; bottom:0; left:calc(100%/3);  width: calc(100%/3); height: 50%; }
+        #map5 { position:absolute; top:0;    right:0; width: calc(100%/3); height: 50%; }
+        #map6 { position:absolute; bottom:0; right:0; width: calc(100%/3); height: 50%; }
+    </style>
+</head>
+
+<body>
+    <div id="map1"></div>
+    <div id="map2"></div>
+    <div id="map3"></div>
+    <div id="map4"></div>
+    <div id="map5"></div>
+    <div id="map6"></div>
+
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.js"></script>
+	<script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
+	<script src="lib/leaflet-mapbox-gl.js"></script>
+	<script src="lib/leaflet-hash.js"></script>
+	<script src="lib/L.Map.Sync.js"></script>
+	<script>
+		var center = [36.5, 137.6];
+		var zoom = 5;
+
+		// Mapbox GL
+		// https://github.com/mapbox/mapbox-gl-leaflet
+		var gl = L.mapboxGL({
+			//style: 'https://raw.githubusercontent.com/osm2vectortiles/mapbox-gl-styles/master/styles/bright-v9-cdn.json',
+			style: 'http://localhost:8081/styles/terrain/style.json', 
+			accessToken: 'no-token'
+		});
+		var map1 = new L.map('map1', {
+				center: center,
+				zoom: zoom,
+				attributionControl: false,
+				zoomControl: false
+			})
+			.addLayer(gl);
+
+		// OpenStreetMap
+		var osm = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+		var map2 = new L.map('map2', {
+				center: center,
+				zoom: zoom,
+				attributionControl: false,
+				zoomControl: false
+			})
+			.addLayer(osm);
+
+		// Google Maps
+		// https://gitlab.com/IvanSanchez/Leaflet.GridLayer.GoogleMutant
+		var google = L.gridLayer.googleMutant({
+			type: 'roadmap'
+		});
+		var map3 = new L.map('map3', {
+				center: center,
+				zoom: zoom,
+				attributionControl: false,
+				zoomControl: false
+			})
+			.addLayer(google);
+
+
+		// Yahoo Map
+		L.YOLPTileLayer = L.TileLayer.extend({
+			getTileUrl: function (coords) {
+				return L.Util.template(this._url, L.extend({
+					x: coords.x,
+					y: Math.pow(2, this._getZoomForUrl() - 1) - 1 - coords.y,
+					z: this._getZoomForUrl() + 1
+				}, this.options));
+			}
+		});
+		var yahoo = new L.YOLPTileLayer('https://map.c.yimg.jp/m?r=1&style=base:material&x={x}&y={y}&z={z}');
+		var map4 = new L.map('map4', {
+				center: center,
+				zoom: zoom,
+				attributionControl: false,
+				zoomControl: false
+			})
+			.addLayer(yahoo);
+
+		// gsi map
+		var gsi = L.tileLayer('//cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png');
+		var map5 = new L.map('map5', {
+				center: center,
+				zoom: zoom,
+				attributionControl: false,
+				zoomControl: false
+			})
+			.addLayer(gsi);
+
+		// mapion
+		var mapion = L.tileLayer('https://cm01.mapion.co.jp/m2/tile/{z}/{x}/{y}.png?usr=atlas_org&v=1.0');
+		var map6 = new L.map('map6', {
+				center: center,
+				zoom: zoom,
+				attributionControl: false,
+				zoomControl: false
+			})
+			.addLayer(mapion);
+
+
+		// leaflet hash
+		var hash = new L.Hash(map1);
+
+		// Leaflet.Sync
+		// https://github.com/jieter/Leaflet.Sync
+		map1.sync(map2);
+		map1.sync(map3);
+		map1.sync(map4);
+		map1.sync(map5);
+		map1.sync(map6);
+	</script>
+
+</body>
+</html>
+
