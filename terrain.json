@@ -3328,7 +3328,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-max-width": 6,
         "text-size": {
@@ -3377,7 +3377,7 @@
         "symbol-avoid-edges": true,
         "text-field": "{name}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-transform": "uppercase",
         "text-letter-spacing": 0.1,
@@ -3432,7 +3432,7 @@
         "symbol-placement": "line",
         "text-field": "{ref}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-padding": 2,
         "text-letter-spacing": 0.05,
@@ -3483,7 +3483,7 @@
         "symbol-placement": "line",
         "text-field": "{ref}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-offset": [
           0,
@@ -3538,7 +3538,7 @@
         "symbol-placement": "line",
         "text-field": "{ref}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-offset": [
           0,
@@ -3581,7 +3581,7 @@
         "symbol-spacing": 500,
         "text-field": "{name}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-letter-spacing": 0.1,
         "text-size": {
@@ -3635,7 +3635,7 @@
       "layout": {
         "text-size": 11,
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "visibility": "visible",
         "text-offset": [
@@ -3687,7 +3687,7 @@
       "layout": {
         "text-size": 11,
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "visibility": "visible",
         "text-offset": [
@@ -3736,7 +3736,7 @@
       "layout": {
         "text-size": 11,
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "visibility": "visible",
         "text-offset": [
@@ -3773,7 +3773,7 @@
       "layout": {
         "text-size": 11,
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "visibility": "visible",
         "text-offset": [
@@ -3815,7 +3815,7 @@
       "layout": {
         "text-size": 11,
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "visibility": "visible",
         "icon-size": 0.8,
@@ -3861,7 +3861,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-max-width": 6,
         "text-size": {
@@ -3913,7 +3913,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-max-width": 6,
         "text-size": {
@@ -3960,7 +3960,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-max-width": 6,
         "text-size": {
@@ -4011,7 +4011,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-max-width": 6,
         "text-size": {
@@ -4058,7 +4058,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "migmix1p-regular"
+          "NotoSansJP-Regular"
         ],
         "text-max-width": 10,
         "text-size": {
