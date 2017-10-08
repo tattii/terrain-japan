@@ -18,6 +18,8 @@ function filter(geojson){
     var railway = {};
     var railway_prop = {};
 
+    var jrlist = readJRList();
+
     for (i in geojson.features){
         var feature = geojson.features[i];
         var name = geojson.features[i].properties.NAME;
@@ -31,9 +33,7 @@ function filter(geojson){
         // normalize
         name = name.split(/ |;|-/)[0];
 
-
-
-        if (name.match("新幹線") || name.match("JR")){
+        if (name.match("新幹線") || name.match("JR") || jrlist[name]){
             //console.log(name);
             if (!railway[name]){
                 railway[name] = [];
@@ -107,4 +107,19 @@ function writeGeojson(crs, matched, props){
 
     fs.writeFile('railway-match.json', JSON.stringify(data));
 }
+
+function readJRList(){
+    var csv = fs.readFileSync('jr.csv', 'utf-8');
+    var data = csv.split('\r\n');
+    
+    var list = {};
+    for (i in data){
+        var d = data[i].substr(2);
+        list[d] = true;
+    }
+
+    return list;
+}
+
+
 
