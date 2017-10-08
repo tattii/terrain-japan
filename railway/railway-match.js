@@ -72,9 +72,9 @@ function match(railway){
             // https://github.com/mapbox/linematch
             // linematch will return a new array 
             // that contains all segments in a that are not matched with segments in b
-            var result = linematch(line, matched[name], 0.0001);
-            //var result = linematch(line, matched[name], 20);
-            //var result = linematch(line, matched[name], 100);
+            //var result = linematch(line, matched[name], 0.01);
+            var result = linematch(line, matched[name], 20);
+            //var result = linematch(line, matched[name], 100); // web mercator (m)
 
             if (result.length) matched[name].push(result[0]);
         }
@@ -87,7 +87,7 @@ function match(railway){
 function writeGeojson(crs, matched, props){
     var data = {
         type: "FeatureCollection",
-        src: geojson.crs,
+        src: crs,
         features: []
     };
 
@@ -105,7 +105,7 @@ function writeGeojson(crs, matched, props){
         }
     }
 
-    fs.writeFile('railway-match.json', JSON.stringify(data));
+    fs.writeFile('railway-match.geojson', JSON.stringify(data));
 }
 
 function readJRList(){
