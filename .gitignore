@@ -1,0 +1,8 @@
+*.pyc
+*.tif
+*.png
+fonts/
+*.mbtiles*
+hillshade/*/*
+landcover/*/*
+railway/*/*

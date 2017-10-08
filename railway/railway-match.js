@@ -1,7 +1,7 @@
 var linematch = require('./linematch');
 var fs = require('fs');
 
-var json = fs.readFileSync("railway2/railway.geojson");
+var json = fs.readFileSync("railway/all2/railway.geojson");
 var geojson = JSON.parse(json);
 
 var railway = {};
@@ -9,6 +9,8 @@ var railway_prop = {};
 for (i in geojson.features){
 	var feature = geojson.features[i];
 	var name = geojson.features[i].properties.NAME;
+
+	if (!name) continue;
 
 	if (name.match("旅客鉄道")){
 		name = name.replace(/.*旅客鉄道/, "JR");
@@ -24,6 +26,7 @@ for (i in geojson.features){
 	}
 }
 
+console.log(railway.length);
 
 var matched = {};
 for (name in railway){
@@ -43,7 +46,8 @@ for (name in railway){
 		// linematch
 		// https://github.com/mapbox/linematch
 		//var result = linematch(line, matched, 0.0001);
-		var result = linematch(line, matched[name], 20);
+		//var result = linematch(line, matched[name], 20);
+		var result = linematch(line, matched[name], 100);
 
 		if (result.length) matched[name].push(result[0]);
 	}
@@ -71,6 +75,6 @@ for (name in matched){
 	}
 }
 
-fs.writeFile('railway-match.json', JSON.stringify(data));
+fs.writeFile('railway/railway-match.json', JSON.stringify(data));
 
 
