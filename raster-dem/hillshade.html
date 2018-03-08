@@ -81,7 +81,10 @@ map.on('load', function () {
     map.addLayer({
         "id": "Mapbox data",
         "source": "mapbox-dem",
-        "type": "hillshade"
+        "type": "hillshade",
+        "layout": {
+            "visibility": "none"
+        }
     // insert below waterway-river-canal-shadow;
     // where hillshading sits in the Mapbox Outdoors style
     }, 'waterway-river-canal-shadow');
@@ -119,9 +122,6 @@ map.on('load', function () {
         "id": "GSI dem",
         "source": "gsi-dem",
         "type": "hillshade",
-        "layout": {
-            "visibility": "none"
-        }
     // insert below waterway-river-canal-shadow;
     // where hillshading sits in the Mapbox Outdoors style
     }, 'waterway-river-canal-shadow');
