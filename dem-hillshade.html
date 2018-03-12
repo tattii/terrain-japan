@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Klokantech Basic - TileServer GL</title>
-  <link rel="stylesheet" type="text/css" href="raster-dem/mapbox-gl.css" />
+  <link rel="stylesheet" href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' />
   <!-- <script src="lib/mapbox-gl.js"></script> -->
   <link rel="stylesheet" type="text/css" href="lib/mapbox.css" />
   <script src='raster-dem/mapbox-gl-gsidem.js'></script>
@@ -28,9 +28,9 @@
       //mapboxgl.setRTLTextPlugin('lib/mapbox-gl-rtl-text.js');
       var map = new mapboxgl.Map({
         container: 'map',
-		center: [38.565, 136.689],
+		center: [136.689, 38.565],
 		zoom: 5,
-        style: 'http://localhost:8081/styles/terrain-dem/style.json',
+        style: 'http://localhost:8080/styles/terrain-dem/style.json',
         hash: true,
         maxZoom: 15,
 		localIdeographFontFamily: "'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, sans-serif"
