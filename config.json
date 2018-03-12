@@ -19,6 +19,10 @@
 		"terrain": {
 			"style": "terrain.json",
 			"tilejson": {}
+		},
+		"terrain-dem": {
+			"style": "terrain-dem.json",
+			"tilejson": {}
 		}
 	},
 	"data": {
