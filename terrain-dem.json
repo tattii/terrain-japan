@@ -20,14 +20,20 @@
       "type": "vector",
       "url": "mbtiles://{openmaptiles}"
     },
-    "hillshade": {
-      "type": "vector",
-      "url": "mbtiles://{hillshade}"
-    },
     "landcover": {
       "type": "vector",
       "url": "mbtiles://{landcover}"
-    }
+    },
+	"gsi-dem": {
+		"type": "raster-dem",
+		"encoding": "gsi",
+		"tiles": [
+			"https://cyberjapandata.gsi.go.jp/xyz/dem_png/{z}/{x}/{y}.png"
+		],
+		"tileSize": 256,
+		"maxzoom": 14,
+		"attribution": "<a href='https://maps.gsi.go.jp/development/ichiran.html#dem' target='_blank'>地理院標高タイル</a>"
+	}
   },
   "sprite": "sprite",
   "glyphs": "{fontstack}/{range}.pbf",
@@ -464,189 +470,11 @@
         }
       }
     },
-    {
-      "id": "hillshade_highlight_bright",
-      "type": "fill",
-      "source": "hillshade",
-      "source-layer": "hillshade",
-      "maxzoom": 18,
-      "filter": [
-        "==",
-        "level",
-        6
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "hsl(0, 0%, 100%)",
-        "fill-opacity": {
-          "stops": [
-            [
-              11,
-              0.15
-            ],
-            [
-              13,
-              0
-            ]
-          ]
-        },
-        "fill-antialias": false
-      }
-    },
-    {
-      "id": "hillshade_highlight_med",
-      "type": "fill",
-      "source": "hillshade",
-      "source-layer": "hillshade",
-      "filter": [
-        "==",
-        "level",
-        5
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "hsl(0, 0%, 100%)",
-        "fill-opacity": {
-          "stops": [
-            [
-              11,
-              0.15
-            ],
-            [
-              13,
-              0
-            ]
-          ]
-        },
-        "fill-antialias": false
-      }
-    },
-    {
-      "id": "hillshade_shadow_faint",
-      "type": "fill",
-      "source": "hillshade",
-      "source-layer": "hillshade",
-      "maxzoom": 17,
-      "filter": [
-        "==",
-        "level",
-        3
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "hsl(56, 59%, 22%)",
-        "fill-opacity": {
-          "stops": [
-            [
-              11,
-              0.07
-            ],
-            [
-              13,
-              0
-            ]
-          ]
-        },
-        "fill-antialias": false
-      }
-    },
-    {
-      "id": "hillshade_shadow_med",
-      "type": "fill",
-      "source": "hillshade",
-      "source-layer": "hillshade",
-      "filter": [
-        "==",
-        "level",
-        2
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "hsl(56, 59%, 22%)",
-        "fill-opacity": {
-          "stops": [
-            [
-              11,
-              0.07
-            ],
-            [
-              13,
-              0
-            ]
-          ]
-        },
-        "fill-antialias": false
-      }
-    },
-    {
-      "id": "hillshade_shadow_dark",
-      "type": "fill",
-      "source": "hillshade",
-      "source-layer": "hillshade",
-      "filter": [
-        "==",
-        "level",
-        1
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "hsl(56, 59%, 22%)",
-        "fill-opacity": {
-          "stops": [
-            [
-              11,
-              0.08
-            ],
-            [
-              13,
-              0
-            ]
-          ]
-        },
-        "fill-antialias": false
-      }
-    },
-    {
-      "id": "hillshade_shadow_extreme",
-      "type": "fill",
-      "source": "hillshade",
-      "source-layer": "hillshade",
-      "maxzoom": 17,
-      "filter": [
-        "==",
-        "level",
-        0
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "fill-color": "hsl(56, 59%, 22%)",
-        "fill-opacity": {
-          "stops": [
-            [
-              11,
-              0.08
-            ],
-            [
-              13,
-              0
-            ]
-          ]
-        },
-        "fill-antialias": false
-      }
-    },
+	{
+		"id": "GSI dem hillshade",
+		"source": "gsi-dem",
+		"type": "hillshade"
+	},
     {
       "id": "waterway-river",
       "type": "line",
