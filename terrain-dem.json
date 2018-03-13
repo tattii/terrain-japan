@@ -473,7 +473,10 @@
 	{
 		"id": "GSI dem hillshade",
 		"source": "gsi-dem",
-		"type": "hillshade"
+		"type": "hillshade",
+		"paint": {
+		  "hillshade-exaggeration": 0.1
+		}
 	},
     {
       "id": "waterway-river",
