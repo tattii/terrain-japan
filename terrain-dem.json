@@ -221,7 +221,7 @@
     },
     {
       "id": "park",
-      "minzoom": 10,
+      "minzoom": 11,
       "type": "fill",
       "source": "openmaptiles",
       "source-layer": "landcover",
@@ -234,7 +234,7 @@
       "paint": {
         "fill-color": "hsl(100, 59%, 76%)",
         "fill-opacity": {
-          "base": 1,
+          "base": 0.7,
           "stops": [
             [
               5,
@@ -242,7 +242,7 @@
             ],
             [
               6,
-              1
+              0.7
             ]
           ]
         }
@@ -264,7 +264,7 @@
       "paint": {
         "fill-color": "hsl(100, 59%, 81%)",
         "fill-opacity": {
-          "base": 1,
+          "base": 0.7,
           "stops": [
             [
               5,
@@ -272,7 +272,7 @@
             ],
             [
               6,
-              1
+              0.7
             ]
           ]
         }
@@ -283,6 +283,7 @@
       "type": "fill",
       "source": "openmaptiles",
       "source-layer": "landuse",
+      "minzoom": 16,
       "filter": [
         "in",
         "class",
@@ -292,6 +293,7 @@
       ],
       "layout": {},
       "paint": {
+        "fill-opacity": 0.6,
         "fill-color": {
           "base": 1,
           "stops": [
@@ -3165,6 +3167,7 @@
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "transportation_name",
+      "minzoom": 14,
       "filter": [
         "all",
         [
@@ -3417,7 +3420,7 @@
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "poi",
-      "minzoom": 5,
+      "minzoom": 16,
       "filter": [
         "all",
         [
@@ -3467,7 +3470,7 @@
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "poi",
-      "minzoom": 14,
+      "minzoom": 16,
       "filter": [
         "all",
         [
@@ -3519,7 +3522,7 @@
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "poi",
-      "minzoom": 5,
+      "minzoom": 13,
       "filter": [
         "all",
         [
@@ -3537,7 +3540,7 @@
         [
           "<=",
           "rank",
-          10
+          2
         ]
       ],
       "layout": {
@@ -3568,7 +3571,7 @@
       "type": "symbol",
       "source": "openmaptiles",
       "source-layer": "railway",
-      "minzoom": 5,
+      "minzoom": 13,
       "filter": [
         "all",
         [
@@ -3712,8 +3715,9 @@
           "island"
         ],
         [
-          "<=",
+          "in",
           "rank",
+          2,
           3
         ]
       ],
