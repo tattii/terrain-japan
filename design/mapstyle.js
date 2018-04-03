@@ -71,6 +71,14 @@ function initGUI(){
         gl._glMap.setStyle(style);
     });
 
+
+
+
+    var f = gui.addFolder("Overlays");
+    f.add(overlays, 'type', ['none', 'rain', 'thunder', 'tornado']);
+
+    f.add(overlays, 'opacity', 0, 1);
+
     return gui;
 }
 
