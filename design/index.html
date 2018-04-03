@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css" rel='stylesheet' />
+
+    <style type="text/css">
+        html, body { width: 100%; height: 100%; margin: 0; }
+        #map { position:absolute; top:0; left:0; width: 100%; height: 100%; }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+	<script src="../raster-dem/mapbox-gl-gsidem.js"></script>
+	<script src="../compare-maps/lib/leaflet-mapbox-gl.js"></script>
+	<script src="../compare-maps/lib/leaflet-hash.js"></script>
+	<script>
+		var center = [36.5, 137.6];
+		var zoom = 5;
+			
+		var map, gl, style;
+	 	fetch('http://localhost:8080/styles/terrain-dem/style.json').then(function(res){
+			return res.json();
+		}).then(function(json){
+			style = json;
+			console.log(style);
+			initMap();
+		}); 
+
+		function initMap(){
+			// Mapbox GL
+			// https://github.com/mapbox/mapbox-gl-leaflet
+			gl = L.mapboxGL({
+				style: style, 
+				accessToken: 'no-token'
+			});
+			map = new L.map('map', {
+					center: center,
+					zoom: zoom,
+					attributionControl: false,
+					zoomControl: false
+				})
+				.addLayer(gl);
+			var hash = new L.Hash(map);
+		}
+
+	</script>
+
+</body>
+</html>
+
