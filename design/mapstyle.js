@@ -26,10 +26,48 @@ function initGUI(){
         gl._glMap.setStyle(style);
     });
     
-    var b4 = gui.addColor(styledef, 'park');
+    var b4 = gui.add(styledef, 'hillshade', 0, 1);
     b4.onChange(function(){
+        style.layers[14].paint['hillshade-exaggeration'] = styledef.hillshade;
+        gl._glMap.setStyle(style);
+    });
+    
+    var b5 = gui.addColor(styledef, 'park');
+    b5.onChange(function(){
         style.layers[7].paint['fill-color'] = styledef.park;
         style.layers[8].paint['fill-color'] = styledef.park;
+        gl._glMap.setStyle(style);
+    });
+    
+    var b6 = gui.addColor(styledef, 'highway');
+    b6.onChange(function(){
+        style.layers[40].paint['line-color'] = styledef.highway; // case
+        style.layers[41].paint['line-color'] = styledef.highway; // case
+        style.layers[42].paint['line-color'] = styledef.highway;
+        style.layers[43].paint['line-color'] = styledef.highway;
+        style.layers[49].paint['line-color'] = styledef.highway; // bridge case
+        style.layers[50].paint['line-color'] = styledef.highway; // case
+        style.layers[51].paint['line-color'] = styledef.highway;
+        style.layers[52].paint['line-color'] = styledef.highway;
+        gl._glMap.setStyle(style);
+    });
+
+    var b7 = gui.addColor(styledef, 'national-road');
+    b7.onChange(function(){
+        style.layers[36].paint['line-color'] = styledef['national-road']; // case
+        style.layers[37].paint['line-color'] = styledef['national-road']; // case
+        style.layers[38].paint['line-color'] = styledef['national-road'];
+        style.layers[39].paint['line-color'] = styledef['national-road'];
+        style.layers[44].paint['line-color'] = styledef['national-road'];
+        style.layers[45].paint['line-color'] = styledef['national-road'];
+        style.layers[46].paint['line-color'] = styledef['national-road'];
+        style.layers[48].paint['line-color'] = styledef['national-road'];
+        gl._glMap.setStyle(style);
+    });
+    
+    var b8 = gui.addColor(styledef, 'city-label');
+    b8.onChange(function(){
+        style.layers[77].paint['text-color'] = styledef['city-label'];
         gl._glMap.setStyle(style);
     });
 
