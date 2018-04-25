@@ -23,6 +23,10 @@
 		"terrain-dem": {
 			"style": "terrain-dem.json",
 			"tilejson": {}
+		},
+		"terrain-dem-border": {
+			"style": "terrain-dem-border.json",
+			"tilejson": {}
 		}
 	},
 	"data": {
@@ -34,6 +38,9 @@
 		},
 		"landcover": {
 			"mbtiles": "landcover.mbtiles"
+		},
+		"border": {
+			"mbtiles": "border/pref.mbtiles"
 		}
 	}
 }
