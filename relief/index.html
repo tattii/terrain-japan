@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapbox GL JS debug page</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' />
+    <style>
+        body { margin: 0; padding: 0; }
+        html, body, #map { height: 100%; }
+    </style>
+</head>
+
+<body>
+
+<div id='map'></div>
+
+<script src='mapbox-gl-gsidem-relief.js'></script>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidGF0dGlpIiwiYSI6ImNqZWZ4eWM3NTI2cGszM2xpYXEyZndpd3IifQ.ifzbR45HecVGxChbdR2hiw';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/tattii/cjq1bfwal3vc92rs01s7npew2', // the outdoors-v10 style but without Hillshade, Contour, Landcover layers
+    //style: 'mapbox://styles/tattii/cjq3r5dzi8y5s2sqk81yx85f0',
+    center: [130.8537, 31.9288],
+    zoom: 10,
+	hash: true
+});
+
+map.on('load', function () {
+
+    map.addSource('gsi-dem', {
+        "type": "raster-dem",
+        "encoding": "gsi",
+        "tiles": [
+			"https://cyberjapandata.gsi.go.jp/xyz/dem_png/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+		"maxzoom": 14,
+		"attribution": '<a href="https://maps.gsi.go.jp/development/ichiran.html#dem" target="_blank">地理院標高タイル</a>'
+    });
+    map.addLayer({
+        "id": "relief",
+        "source": "gsi-dem",
+        "type": "relief",
+        "paint": {
+            "relief-opacity": 0.7,
+            "relief-gradation": true,
+            "relief-colors": [
+                0, "#2db4b4",
+                100, "#71b42d",
+                300, "#b4a72d",
+                1000, "#b4562d",
+                2000, "#b4491b",
+                null, "#b43d09"
+            ]
+        }
+    }, 'waterway-river-canal-shadow');
+    map.addLayer({
+        "id": "GSI dem",
+        "source": "gsi-dem",
+        "type": "hillshade",
+    }, 'relief');
+});
+
+
+</script>
+</body>
+</html>
