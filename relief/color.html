@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relief map</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' />
+    <style>
+        body { margin: 0; padding: 0; }
+        html, body, #map { height: 100%; }
+    </style>
+</head>
+
+<body>
+
+<div id='map'></div>
+
+<script src='mapbox-gl-gsidem-relief.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidGF0dGlpIiwiYSI6ImNqZWZ4eWM3NTI2cGszM2xpYXEyZndpd3IifQ.ifzbR45HecVGxChbdR2hiw';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/tattii/cjq1bfwal3vc92rs01s7npew2', // the outdoors-v10 style but without Hillshade, Contour, Landcover layers
+    center: [130.8537, 31.9288],
+    zoom: 10,
+	hash: true
+});
+
+map.on('load', function () {
+
+    map.addSource('gsi-dem', {
+        "type": "raster-dem",
+        "encoding": "gsi",
+        "tiles": [
+			"https://cyberjapandata.gsi.go.jp/xyz/dem_png/{z}/{x}/{y}.png"
+        ],
+        "tileSize": 256,
+		"maxzoom": 14,
+		"attribution": '<a href="https://maps.gsi.go.jp/development/ichiran.html#dem" target="_blank">地理院標高タイル</a>'
+    });
+
+	var colors = {
+		"-0": '#2db4b4',
+		"0-100": "#71b42d",
+		"100-300": "#b4a72d",
+		"300-1000": "#b4562d",
+		"1000-2000": "#b4491b",
+		"2000-": "#b43d09"
+	};
+
+    map.addLayer({
+        "id": "relief",
+        "source": "gsi-dem",
+        "type": "relief",
+        "paint": {
+            "relief-opacity": 0.7,
+            "relief-gradation": true,
+            "relief-colors": [
+				0, colors['-0'],
+				100, colors['0-100'],
+				300, colors['100-300'],
+				1000, colors['300-1000'],
+				2000, colors['1000-2000'],
+				null, colors['2000-']
+            ]
+        }
+    }, 'waterway-river-canal-shadow');
+    map.addLayer({
+        "id": "GSI dem",
+        "source": "gsi-dem",
+        "type": "hillshade",
+    }, 'relief');
+    
+
+	var gui = new dat.GUI();
+    gui.addColor(colors, '-0').onChange(setReliefColors);
+    gui.addColor(colors, '0-100').onChange(setReliefColors);
+    gui.addColor(colors, '100-300').onChange(setReliefColors);
+    gui.addColor(colors, '300-1000').onChange(setReliefColors);
+    gui.addColor(colors, '1000-2000').onChange(setReliefColors);
+    gui.addColor(colors, '2000-').onChange(setReliefColors);
+
+	function setReliefColors() {
+		map.setPaintProperty('relief', "relief-colors", [
+			0, colors['-0'],
+			100, colors['0-100'],
+			300, colors['100-300'],
+			1000, colors['300-1000'],
+			2000, colors['1000-2000'],
+			null, colors['2000-']
+        ]);
+	}
+});
+
+
+</script>
+</body>
+</html>
