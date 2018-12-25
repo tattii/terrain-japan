@@ -46,7 +46,8 @@ map.on('load', function () {
 		"100-300": "#b4a72d",
 		"300-1000": "#b4562d",
 		"1000-2000": "#b4491b",
-		"2000-": "#b43d09"
+		"2000-4000": "#b43d09",
+		"4000-": "#b43d09"
 	};
 
     map.addLayer({
@@ -62,7 +63,8 @@ map.on('load', function () {
 				300, colors['100-300'],
 				1000, colors['300-1000'],
 				2000, colors['1000-2000'],
-				null, colors['2000-']
+				4000, colors['2000-4000'],
+				null, colors['4000-']
             ]
         }
     }, 'waterway-river-canal-shadow');
@@ -79,7 +81,8 @@ map.on('load', function () {
     gui.addColor(colors, '100-300').onChange(setReliefColors);
     gui.addColor(colors, '300-1000').onChange(setReliefColors);
     gui.addColor(colors, '1000-2000').onChange(setReliefColors);
-    gui.addColor(colors, '2000-').onChange(setReliefColors);
+    gui.addColor(colors, '2000-4000').onChange(setReliefColors);
+    gui.addColor(colors, '4000-').onChange(setReliefColors);
 
 	function setReliefColors() {
 		map.setPaintProperty('relief', "relief-colors", [
@@ -88,7 +91,8 @@ map.on('load', function () {
 			300, colors['100-300'],
 			1000, colors['300-1000'],
 			2000, colors['1000-2000'],
-			null, colors['2000-']
+			4000, colors['2000-4000'],
+			null, colors['4000-']
         ]);
 	}
 });
